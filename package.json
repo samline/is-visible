@@ -1,0 +1,58 @@
+{
+  "name": "@samline/is-visible",
+  "version": "0.1.0",
+  "description": "Lightweight IntersectionObserver utility for visibility enter/leave callbacks.",
+  "author": "Samuel Olvera (samline)",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/samline/is-visible.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samline/is-visible/issues"
+  },
+  "homepage": "https://github.com/samline/is-visible#readme",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run clean && npm run build && npm run typecheck && npm test"
+  },
+  "keywords": [
+    "intersection-observer",
+    "visibility",
+    "viewport",
+    "browser",
+    "dom",
+    "typescript",
+    "astro",
+    "lazy-load"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

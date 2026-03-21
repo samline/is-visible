@@ -48,9 +48,9 @@ IntersectionObserver API.
 
 ```ts
 const disconnect = isVisible(targetElement, {
-	visible: () => console.log('Element is visible'),
-	notVisible: () => console.log('Element left the viewport'),
-	inOut: true,
+  visible: () => console.log('Element is visible'),
+  notVisible: () => console.log('Element left the viewport'),
+  inOut: true
 })
 
 disconnect()
@@ -64,10 +64,10 @@ isVisible(element, options?)
 
 ### Parameters
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| element | Element | DOM element to observe |
-| options | IsVisibleOptions | Optional configuration object |
+| Parameter | Type             | Description                   |
+| --------- | ---------------- | ----------------------------- |
+| element   | Element          | DOM element to observe        |
+| options   | IsVisibleOptions | Optional configuration object |
 
 ### Returns
 
@@ -79,13 +79,13 @@ A cleanup function that disconnects the observer.
 
 ## Options
 
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| inOut | boolean | false | Enables detection when the element leaves the viewport |
-| visible | () => void | () => {} | Triggered when the element enters the viewport |
-| notVisible | () => void | () => {} | Triggered when the element leaves the viewport when inOut is true |
-| once | boolean | false | Stops observing after the first visible trigger |
-| options | IntersectionObserverInit | {} | Native IntersectionObserver configuration |
+| Property   | Type                     | Default  | Description                                                       |
+| ---------- | ------------------------ | -------- | ----------------------------------------------------------------- |
+| inOut      | boolean                  | false    | Enables detection when the element leaves the viewport            |
+| visible    | () => void               | () => {} | Triggered when the element enters the viewport                    |
+| notVisible | () => void               | () => {} | Triggered when the element leaves the viewport when inOut is true |
+| once       | boolean                  | false    | Stops observing after the first visible trigger                   |
+| options    | IntersectionObserverInit | {}       | Native IntersectionObserver configuration                         |
 
 ### IntersectionObserver Options
 
@@ -116,12 +116,12 @@ options: {
 const box = document.querySelector('.animate-me')
 
 if (box) {
-	isVisible(box, {
-		visible: () => {
-			box.classList.add('fade-in')
-		},
-		once: true,
-	})
+  isVisible(box, {
+    visible: () => {
+      box.classList.add('fade-in')
+    },
+    once: true
+  })
 }
 ```
 
@@ -131,11 +131,11 @@ if (box) {
 const video = document.querySelector('#hero-video') as HTMLVideoElement | null
 
 if (video) {
-	isVisible(video, {
-		inOut: true,
-		visible: () => video.play(),
-		notVisible: () => video.pause(),
-	})
+  isVisible(video, {
+    inOut: true,
+    visible: () => video.play(),
+    notVisible: () => video.pause()
+  })
 }
 ```
 
@@ -145,13 +145,13 @@ if (video) {
 const sentinel = document.querySelector('#load-more-trigger')
 
 if (sentinel) {
-	isVisible(sentinel, {
-		visible: () => fetchMoreData(),
-		options: {
-			rootMargin: '400px',
-			threshold: 0.1,
-		},
-	})
+  isVisible(sentinel, {
+    visible: () => fetchMoreData(),
+    options: {
+      rootMargin: '400px',
+      threshold: 0.1
+    }
+  })
 }
 ```
 
@@ -159,17 +159,17 @@ if (sentinel) {
 
 ```ts
 useEffect(() => {
-	if (!myRef.current) {
-		return;
-	}
+  if (!myRef.current) {
+    return
+  }
 
-	const unobserve = isVisible(myRef.current, {
-		visible: () => console.log('Visible!'),
-	})
+  const unobserve = isVisible(myRef.current, {
+    visible: () => console.log('Visible!')
+  })
 
-	return () => {
-		unobserve()
-	}
+  return () => {
+    unobserve()
+  }
 }, [])
 ```
 

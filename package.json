@@ -35,6 +35,8 @@
     "clean": "rm -rf dist",
     "build": "tsup src/index.ts --format esm --dts --clean",
     "dev": "tsup src/index.ts --format esm --dts --watch",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "prepublishOnly": "npm run clean && npm run build && npm run typecheck && npm test"
@@ -51,6 +53,7 @@
   ],
   "devDependencies": {
     "@types/node": "^24.5.2",
+    "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"

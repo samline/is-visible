@@ -21,6 +21,7 @@ needed.
 - Framework Imports
 - Quick Start
 - React
+- Vue
 - API Reference
 - Options
 - Examples
@@ -69,6 +70,15 @@ import { VisibilityObserver, useIsVisible } from '@samline/is-visible/react'
 React has its own native implementation and types. See
 [docs/react.md](docs/react.md) for the full guide.
 
+### Vue
+
+```ts
+import { VisibilityObserver, useIsVisible } from '@samline/is-visible/vue'
+```
+
+Vue has its own native implementation and types. See
+[docs/vue.md](docs/vue.md) for the full guide.
+
 No external runtime dependencies are required. The utility uses the native
 IntersectionObserver API.
 
@@ -104,6 +114,42 @@ export function FadeInSection() {
     </section>
   )
 }
+```
+
+## Vue
+
+### Composable
+
+```vue
+<script setup lang="ts">
+import { useIsVisible } from '@samline/is-visible/vue'
+
+const { isVisible, target } = useIsVisible({
+  inOut: true,
+  visible: () => console.log('Entered'),
+  notVisible: () => console.log('Left')
+})
+</script>
+
+<template>
+  <section ref="target" :class="isVisible ? 'is-visible' : 'is-hidden'">
+    Content
+  </section>
+</template>
+```
+
+### Component
+
+```vue
+<script setup lang="ts">
+import { VisibilityObserver } from '@samline/is-visible/vue'
+</script>
+
+<template>
+  <VisibilityObserver as="section" :once="true" v-slot="{ isVisible }">
+    <div :class="isVisible ? 'fade-in' : 'pre-enter'">Animated block</div>
+  </VisibilityObserver>
+</template>
 ```
 
 ### Component
@@ -230,6 +276,15 @@ useEffect manually:
 
 ```tsx
 import { useIsVisible } from '@samline/is-visible/react'
+```
+
+### Vue Integration
+
+Use the native Vue entrypoint instead of wiring the Vanilla API inside
+mounted/watch logic manually:
+
+```ts
+import { useIsVisible } from '@samline/is-visible/vue'
 ```
 
 ## How It Works

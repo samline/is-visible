@@ -1,6 +1,6 @@
 {
   "name": "@samline/is-visible",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight IntersectionObserver utility for visibility enter/leave callbacks.",
   "author": "Samuel Olvera (samline)",
   "license": "MIT",
@@ -18,6 +18,22 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./vanilla": {
+      "types": "./dist/vanilla/index.d.ts",
+      "import": "./dist/vanilla/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
     }
   },
   "engines": {
@@ -33,8 +49,8 @@
   "homepage": "https://github.com/samline/is-visible#readme",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsup src/index.ts --format esm --dts --clean",
-    "dev": "tsup src/index.ts --format esm --dts --watch",
+    "build": "tsup src/index.ts src/vanilla/index.ts src/react/index.ts --format esm --dts --clean",
+    "dev": "tsup src/index.ts src/vanilla/index.ts src/react/index.ts --format esm --dts --watch",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
@@ -47,13 +63,20 @@
     "viewport",
     "browser",
     "dom",
+    "react",
     "typescript",
     "astro",
     "lazy-load"
   ],
   "devDependencies": {
+    "@testing-library/react": "^16.3.0",
     "@types/node": "^24.5.2",
+    "@types/react": "^19.2.1",
+    "@types/react-dom": "^19.2.1",
+    "jsdom": "^27.0.0",
     "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "tsup": "^8.5.0",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"

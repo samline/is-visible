@@ -18,7 +18,9 @@ needed.
 ## Table of Contents
 
 - Installation
+- Framework Imports
 - Quick Start
+- React
 - API Reference
 - Options
 - Examples
@@ -41,6 +43,32 @@ Then import it where needed:
 import isVisible from '@samline/is-visible'
 ```
 
+## Framework Imports
+
+Choose the entrypoint that matches your stack so you only import the
+implementation you need.
+
+### Vanilla JS
+
+```ts
+import isVisible from '@samline/is-visible'
+```
+
+You can also use the explicit subpath if you prefer:
+
+```ts
+import isVisible from '@samline/is-visible/vanilla'
+```
+
+### React
+
+```ts
+import { VisibilityObserver, useIsVisible } from '@samline/is-visible/react'
+```
+
+React has its own native implementation and types. See
+[docs/react.md](docs/react.md) for the full guide.
+
 No external runtime dependencies are required. The utility uses the native
 IntersectionObserver API.
 
@@ -54,6 +82,46 @@ const disconnect = isVisible(targetElement, {
 })
 
 disconnect()
+```
+
+## React
+
+### Hook
+
+```tsx
+import { useIsVisible } from '@samline/is-visible/react'
+
+export function FadeInSection() {
+  const { isVisible, ref } = useIsVisible({
+    inOut: true,
+    visible: () => console.log('Entered'),
+    notVisible: () => console.log('Left')
+  })
+
+  return (
+    <section ref={ref} className={isVisible ? 'is-visible' : 'is-hidden'}>
+      Content
+    </section>
+  )
+}
+```
+
+### Component
+
+```tsx
+import { VisibilityObserver } from '@samline/is-visible/react'
+
+export function AnimatedBlock() {
+  return (
+    <VisibilityObserver as='section' once>
+      {({ isVisible }) => (
+        <div className={isVisible ? 'fade-in' : 'pre-enter'}>
+          Animated block
+        </div>
+      )}
+    </VisibilityObserver>
+  )
+}
 ```
 
 ## API Reference
@@ -157,20 +225,11 @@ if (sentinel) {
 
 ### React Integration
 
-```ts
-useEffect(() => {
-  if (!myRef.current) {
-    return
-  }
+Use the native React entrypoint instead of wiring the Vanilla API inside
+useEffect manually:
 
-  const unobserve = isVisible(myRef.current, {
-    visible: () => console.log('Visible!')
-  })
-
-  return () => {
-    unobserve()
-  }
-}, [])
+```tsx
+import { useIsVisible } from '@samline/is-visible/react'
 ```
 
 ## How It Works
@@ -204,8 +263,8 @@ This can trigger loading before the element becomes visible.
 
 ### Disconnect observers in frameworks
 
-In React, Vue, Astro, or similar environments, always return the cleanup
-function when a component unmounts.
+In React, Vue, Astro, or similar environments, always disconnect observers when
+the component unmounts. The React implementation does this for you.
 
 ## Notes
 

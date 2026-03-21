@@ -54,23 +54,23 @@ describe('useIsVisible', () => {
     const observer = getInstance()
 
     expect(observer.observe).toHaveBeenCalledWith(target)
-    expect(wrapper.get('[data-testid="target"]').attributes('data-visible')).toBe(
-      'false'
-    )
+    expect(
+      wrapper.get('[data-testid="target"]').attributes('data-visible')
+    ).toBe('false')
 
     observer.trigger([createEntry(target, true)])
     await nextTick()
 
-    expect(wrapper.get('[data-testid="target"]').attributes('data-visible')).toBe(
-      'true'
-    )
+    expect(
+      wrapper.get('[data-testid="target"]').attributes('data-visible')
+    ).toBe('true')
 
     observer.trigger([createEntry(target, false)])
     await nextTick()
 
-    expect(wrapper.get('[data-testid="target"]').attributes('data-visible')).toBe(
-      'false'
-    )
+    expect(
+      wrapper.get('[data-testid="target"]').attributes('data-visible')
+    ).toBe('false')
   })
 
   it('runs visibility callbacks and respects once', async () => {

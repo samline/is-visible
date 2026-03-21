@@ -23,7 +23,9 @@ export interface UseIsVisibleResult<TElement extends Element = HTMLElement> {
 export function useIsVisible<TElement extends Element = HTMLElement>(
   optionsSource: MaybeRefOrGetter<UseIsVisibleOptions | undefined> = {}
 ): UseIsVisibleResult<TElement> {
-  const target = shallowRef<TElement | null>(null) as ShallowRef<TElement | null>
+  const target = shallowRef<TElement | null>(
+    null
+  ) as ShallowRef<TElement | null>
   const entry = shallowRef<IntersectionObserverEntry | null>(null)
   const isVisible = ref(false)
 

@@ -30,22 +30,22 @@ const { isVisible, target } = useIsVisible({
 
 ### Composable options
 
-| Property | Type | Default | Description |
-| --- | --- | --- | --- |
-| initialValue | boolean | false | Initial state returned before the observer fires |
-| inOut | boolean | false | Enables the notVisible callback when the element leaves |
-| visible | () => void | () => {} | Runs when the element enters the viewport |
-| notVisible | () => void | () => {} | Runs when the element leaves and inOut is enabled |
-| once | boolean | false | Unobserves the element after the first visible event |
-| options | IntersectionObserverInit | {} | Native observer options |
+| Property     | Type                     | Default  | Description                                             |
+| ------------ | ------------------------ | -------- | ------------------------------------------------------- |
+| initialValue | boolean                  | false    | Initial state returned before the observer fires        |
+| inOut        | boolean                  | false    | Enables the notVisible callback when the element leaves |
+| visible      | () => void               | () => {} | Runs when the element enters the viewport               |
+| notVisible   | () => void               | () => {} | Runs when the element leaves and inOut is enabled       |
+| once         | boolean                  | false    | Unobserves the element after the first visible event    |
+| options      | IntersectionObserverInit | {}       | Native observer options                                 |
 
 ### Composable return value
 
-| Property | Type | Description |
-| --- | --- | --- |
-| target | ShallowRef<Element \| null> | Assign it to the element you want to observe |
-| isVisible | Ref<boolean> | Current visibility state |
-| entry | ShallowRef<IntersectionObserverEntry \| null> | Last observer entry |
+| Property  | Type                                          | Description                                  |
+| --------- | --------------------------------------------- | -------------------------------------------- |
+| target    | ShallowRef<Element \| null>                   | Assign it to the element you want to observe |
+| isVisible | Ref<boolean>                                  | Current visibility state                     |
+| entry     | ShallowRef<IntersectionObserverEntry \| null> | Last observer entry                          |
 
 ## VisibilityObserver
 

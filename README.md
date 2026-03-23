@@ -21,6 +21,7 @@ needed.
 - Framework Imports
 - Quick Start
 - React
+- Svelte
 - Vue
 - API Reference
 - Options
@@ -79,6 +80,18 @@ import { VisibilityObserver, useIsVisible } from '@samline/is-visible/vue'
 Vue has its own native implementation and types. See
 [docs/vue.md](docs/vue.md) for the full guide.
 
+### Svelte
+
+```ts
+import {
+  createVisibilityAction,
+  useIsVisible
+} from '@samline/is-visible/svelte'
+```
+
+Svelte has its own native implementation and types. See
+[docs/svelte.md](docs/svelte.md) for the full guide.
+
 No external runtime dependencies are required. The utility uses the native
 IntersectionObserver API.
 
@@ -116,6 +129,56 @@ export function FadeInSection() {
 }
 ```
 
+### Component
+
+```tsx
+import { VisibilityObserver } from '@samline/is-visible/react'
+
+export function AnimatedBlock() {
+  return (
+    <VisibilityObserver as='section' once>
+      {({ isVisible }) => (
+        <div className={isVisible ? 'fade-in' : 'pre-enter'}>
+          Animated block
+        </div>
+      )}
+    </VisibilityObserver>
+  )
+}
+```
+
+## Svelte
+
+### Helper
+
+```svelte
+<script lang="ts">
+  import { useIsVisible } from '@samline/is-visible/svelte'
+
+  const { action, isVisible } = useIsVisible({
+    inOut: true,
+    visible: () => console.log('Entered'),
+    notVisible: () => console.log('Left')
+  })
+</script>
+
+<section use:action class:is-visible={$isVisible} class:is-hidden={!$isVisible}>
+  Content
+</section>
+```
+
+### Action
+
+```svelte
+<script lang="ts">
+  import { createVisibilityAction } from '@samline/is-visible/svelte'
+
+  const visibility = createVisibilityAction({ once: true })
+</script>
+
+<div use:visibility>Animated block</div>
+```
+
 ## Vue
 
 ### Composable
@@ -150,24 +213,6 @@ import { VisibilityObserver } from '@samline/is-visible/vue'
     <div :class="isVisible ? 'fade-in' : 'pre-enter'">Animated block</div>
   </VisibilityObserver>
 </template>
-```
-
-### Component
-
-```tsx
-import { VisibilityObserver } from '@samline/is-visible/react'
-
-export function AnimatedBlock() {
-  return (
-    <VisibilityObserver as='section' once>
-      {({ isVisible }) => (
-        <div className={isVisible ? 'fade-in' : 'pre-enter'}>
-          Animated block
-        </div>
-      )}
-    </VisibilityObserver>
-  )
-}
 ```
 
 ## API Reference
@@ -287,6 +332,15 @@ mounted/watch logic manually:
 import { useIsVisible } from '@samline/is-visible/vue'
 ```
 
+### Svelte Integration
+
+Use the native Svelte entrypoint instead of wiring the Vanilla API inside
+onMount blocks manually:
+
+```ts
+import { useIsVisible } from '@samline/is-visible/svelte'
+```
+
 ## How It Works
 
 The utility wraps the native IntersectionObserver.
@@ -318,8 +372,9 @@ This can trigger loading before the element becomes visible.
 
 ### Disconnect observers in frameworks
 
-In React, Vue, Astro, or similar environments, always disconnect observers when
-the component unmounts. The React implementation does this for you.
+In React, Vue, Svelte, Astro, or similar environments, always disconnect
+observers when the component unmounts or action is destroyed. The framework
+implementations here do this for you.
 
 ## Notes
 

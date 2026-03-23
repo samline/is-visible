@@ -1,6 +1,6 @@
 {
   "name": "@samline/is-visible",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Lightweight IntersectionObserver utility for visibility enter/leave callbacks.",
   "author": "Samuel Olvera (samline)",
   "license": "MIT",
@@ -63,10 +63,12 @@
     "url": "https://github.com/samline/is-visible/issues"
   },
   "homepage": "https://github.com/samline/is-visible#readme",
+  "jsdelivr": "./dist/browser/is-visible.global.js",
+  "unpkg": "./dist/browser/is-visible.global.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "tsup src/index.ts src/vanilla/index.ts src/react/index.ts src/vue/index.ts src/svelte/index.ts --format esm --dts --clean",
-    "dev": "tsup src/index.ts src/vanilla/index.ts src/react/index.ts src/vue/index.ts src/svelte/index.ts --format esm --dts --watch",
+    "build": "tsup --config tsup.config.ts",
+    "dev": "tsup --config tsup.config.ts --watch",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
@@ -78,13 +80,16 @@
     "visibility",
     "viewport",
     "browser",
+    "cdn",
     "dom",
     "react",
     "svelte",
     "vue",
     "typescript",
     "astro",
-    "lazy-load"
+    "lazy-load",
+    "shopify",
+    "wordpress"
   ],
   "devDependencies": {
     "@testing-library/react": "^16.3.0",

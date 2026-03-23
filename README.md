@@ -12,22 +12,18 @@ It provides a small abstraction for common tasks like:
 - Infinite scroll triggers
 - Analytics visibility tracking
 
-The utility returns a cleanup function so you can stop observing elements when
-needed.
+The package ships a shared vanilla API plus framework-specific entrypoints for
+React, Vue and Svelte. It also includes a browser bundle for projects that load
+JavaScript directly in the page without a build step.
 
 ## Table of Contents
 
 - Installation
-- Framework Imports
+- Entry Points
 - Quick Start
-- React
-- Svelte
-- Vue
-- API Reference
-- Options
-- Examples
-- How It Works
-- Best Practices
+- Documentation Guides
+- Shared API Summary
+- Shared Options
 - Notes
 - License
 
@@ -39,65 +35,32 @@ Install the package from npm:
 npm install @samline/is-visible
 ```
 
-Then import it where needed:
+Use the npm package when your project has a build step. If you are working in
+Shopify, WordPress or any browser-only template without compilation, use the
+browser bundle described in [docs/browser.md](docs/browser.md).
 
-```ts
-import isVisible from '@samline/is-visible'
-```
-
-## Framework Imports
+## Entry Points
 
 Choose the entrypoint that matches your stack so you only import the
 implementation you need.
 
-### Vanilla JS
+| Use case                    | Import                                                                              | Guide                              |
+| --------------------------- | ----------------------------------------------------------------------------------- | ---------------------------------- |
+| Vanilla JS                  | `import isVisible from '@samline/is-visible'`                                       | [docs/vanilla.md](docs/vanilla.md) |
+| Vanilla JS explicit subpath | `import isVisible from '@samline/is-visible/vanilla'`                               | [docs/vanilla.md](docs/vanilla.md) |
+| Browser / CDN               | `<script src=".../dist/browser/is-visible.global.js"></script>`                     | [docs/browser.md](docs/browser.md) |
+| React                       | `import { VisibilityObserver, useIsVisible } from '@samline/is-visible/react'`      | [docs/react.md](docs/react.md)     |
+| Vue                         | `import { VisibilityObserver, useIsVisible } from '@samline/is-visible/vue'`        | [docs/vue.md](docs/vue.md)         |
+| Svelte                      | `import { createVisibilityAction, useIsVisible } from '@samline/is-visible/svelte'` | [docs/svelte.md](docs/svelte.md)   |
 
-```ts
-import isVisible from '@samline/is-visible'
-```
-
-You can also use the explicit subpath if you prefer:
-
-```ts
-import isVisible from '@samline/is-visible/vanilla'
-```
-
-### React
-
-```ts
-import { VisibilityObserver, useIsVisible } from '@samline/is-visible/react'
-```
-
-React has its own native implementation and types. See
-[docs/react.md](docs/react.md) for the full guide.
-
-### Vue
-
-```ts
-import { VisibilityObserver, useIsVisible } from '@samline/is-visible/vue'
-```
-
-Vue has its own native implementation and types. See
-[docs/vue.md](docs/vue.md) for the full guide.
-
-### Svelte
-
-```ts
-import {
-  createVisibilityAction,
-  useIsVisible
-} from '@samline/is-visible/svelte'
-```
-
-Svelte has its own native implementation and types. See
-[docs/svelte.md](docs/svelte.md) for the full guide.
-
-No external runtime dependencies are required. The utility uses the native
-IntersectionObserver API.
+No external runtime dependencies are required for the shared vanilla or browser
+bundle APIs. The package uses the native IntersectionObserver API.
 
 ## Quick Start
 
 ```ts
+import isVisible from '@samline/is-visible'
+
 const disconnect = isVisible(targetElement, {
   visible: () => console.log('Element is visible'),
   notVisible: () => console.log('Element left the viewport'),
@@ -107,115 +70,53 @@ const disconnect = isVisible(targetElement, {
 disconnect()
 ```
 
-## React
+For detailed setup and additional examples:
 
-### Hook
+- Vanilla DOM usage: [docs/vanilla.md](docs/vanilla.md)
+- Browser/CDN usage: [docs/browser.md](docs/browser.md)
+- React usage: [docs/react.md](docs/react.md)
+- Vue usage: [docs/vue.md](docs/vue.md)
+- Svelte usage: [docs/svelte.md](docs/svelte.md)
 
-```tsx
-import { useIsVisible } from '@samline/is-visible/react'
+## Documentation Guides
 
-export function FadeInSection() {
-  const { isVisible, ref } = useIsVisible({
-    inOut: true,
-    visible: () => console.log('Entered'),
-    notVisible: () => console.log('Left')
-  })
+### Vanilla
 
-  return (
-    <section ref={ref} className={isVisible ? 'is-visible' : 'is-hidden'}>
-      Content
-    </section>
-  )
-}
-```
+Use the shared DOM-oriented API with direct element references and callbacks.
 
-### Component
+Guide: [docs/vanilla.md](docs/vanilla.md)
 
-```tsx
-import { VisibilityObserver } from '@samline/is-visible/react'
+### Browser and CDN
 
-export function AnimatedBlock() {
-  return (
-    <VisibilityObserver as='section' once>
-      {({ isVisible }) => (
-        <div className={isVisible ? 'fade-in' : 'pre-enter'}>
-          Animated block
-        </div>
-      )}
-    </VisibilityObserver>
-  )
-}
-```
+Use the browser bundle when your project loads scripts directly in the page and
+cannot compile npm modules.
 
-## Svelte
+Guide: [docs/browser.md](docs/browser.md)
 
-### Helper
+### React
 
-```svelte
-<script lang="ts">
-  import { useIsVisible } from '@samline/is-visible/svelte'
+Use the React-native hook and component entrypoint instead of wiring the vanilla
+API manually inside effects.
 
-  const { action, isVisible } = useIsVisible({
-    inOut: true,
-    visible: () => console.log('Entered'),
-    notVisible: () => console.log('Left')
-  })
-</script>
+Guide: [docs/react.md](docs/react.md)
 
-<section use:action class:is-visible={$isVisible} class:is-hidden={!$isVisible}>
-  Content
-</section>
-```
+### Vue
 
-### Action
+Use the Vue-native composable and component entrypoint instead of wiring the
+vanilla API manually in lifecycle hooks.
 
-```svelte
-<script lang="ts">
-  import { createVisibilityAction } from '@samline/is-visible/svelte'
+Guide: [docs/vue.md](docs/vue.md)
 
-  const visibility = createVisibilityAction({ once: true })
-</script>
+### Svelte
 
-<div use:visibility>Animated block</div>
-```
+Use the Svelte-native helper and action entrypoint instead of wiring the
+vanilla API manually in onMount blocks.
 
-## Vue
+Guide: [docs/svelte.md](docs/svelte.md)
 
-### Composable
+## Shared API Summary
 
-```vue
-<script setup lang="ts">
-import { useIsVisible } from '@samline/is-visible/vue'
-
-const { isVisible, target } = useIsVisible({
-  inOut: true,
-  visible: () => console.log('Entered'),
-  notVisible: () => console.log('Left')
-})
-</script>
-
-<template>
-  <section ref="target" :class="isVisible ? 'is-visible' : 'is-hidden'">
-    Content
-  </section>
-</template>
-```
-
-### Component
-
-```vue
-<script setup lang="ts">
-import { VisibilityObserver } from '@samline/is-visible/vue'
-</script>
-
-<template>
-  <VisibilityObserver as="section" :once="true" v-slot="{ isVisible }">
-    <div :class="isVisible ? 'fade-in' : 'pre-enter'">Animated block</div>
-  </VisibilityObserver>
-</template>
-```
-
-## API Reference
+The shared vanilla API has the following shape:
 
 ```ts
 isVisible(element, options?)
@@ -223,10 +124,10 @@ isVisible(element, options?)
 
 ### Parameters
 
-| Parameter | Type             | Description                   |
-| --------- | ---------------- | ----------------------------- |
-| element   | Element          | DOM element to observe        |
-| options   | IsVisibleOptions | Optional configuration object |
+| Parameter | Type             | Description                     |
+| --------- | ---------------- | ------------------------------- |
+| element   | Element          | DOM element to observe          |
+| options   | IsVisibleOptions | Optional observer configuration |
 
 ### Returns
 
@@ -234,147 +135,20 @@ isVisible(element, options?)
 () => void
 ```
 
-A cleanup function that disconnects the observer.
+The returned cleanup function disconnects the observer.
 
-## Options
+## Shared Options
 
 | Property   | Type                     | Default  | Description                                                       |
 | ---------- | ------------------------ | -------- | ----------------------------------------------------------------- |
 | inOut      | boolean                  | false    | Enables detection when the element leaves the viewport            |
-| visible    | () => void               | () => {} | Triggered when the element enters the viewport                    |
-| notVisible | () => void               | () => {} | Triggered when the element leaves the viewport when inOut is true |
+| visible    | () => void               | () => {} | Runs when the element enters the viewport                         |
+| notVisible | () => void               | () => {} | Runs when the element leaves the viewport when `inOut` is enabled |
 | once       | boolean                  | false    | Stops observing after the first visible trigger                   |
 | options    | IntersectionObserverInit | {}       | Native IntersectionObserver configuration                         |
 
-### IntersectionObserver Options
-
-You can pass any native observer options:
-
-```ts
-{
-	root: HTMLElement | null
-	rootMargin: string
-	threshold: number | number[]
-}
-```
-
-Example:
-
-```ts
-options: {
-	rootMargin: '200px',
-	threshold: 0.25,
-}
-```
-
-## Examples
-
-### One-time Entrance Animation
-
-```ts
-const box = document.querySelector('.animate-me')
-
-if (box) {
-  isVisible(box, {
-    visible: () => {
-      box.classList.add('fade-in')
-    },
-    once: true
-  })
-}
-```
-
-### Auto-play or Pause Video
-
-```ts
-const video = document.querySelector('#hero-video') as HTMLVideoElement | null
-
-if (video) {
-  isVisible(video, {
-    inOut: true,
-    visible: () => video.play(),
-    notVisible: () => video.pause()
-  })
-}
-```
-
-### Infinite Scroll or Lazy Loading
-
-```ts
-const sentinel = document.querySelector('#load-more-trigger')
-
-if (sentinel) {
-  isVisible(sentinel, {
-    visible: () => fetchMoreData(),
-    options: {
-      rootMargin: '400px',
-      threshold: 0.1
-    }
-  })
-}
-```
-
-### React Integration
-
-Use the native React entrypoint instead of wiring the Vanilla API inside
-useEffect manually:
-
-```tsx
-import { useIsVisible } from '@samline/is-visible/react'
-```
-
-### Vue Integration
-
-Use the native Vue entrypoint instead of wiring the Vanilla API inside
-mounted/watch logic manually:
-
-```ts
-import { useIsVisible } from '@samline/is-visible/vue'
-```
-
-### Svelte Integration
-
-Use the native Svelte entrypoint instead of wiring the Vanilla API inside
-onMount blocks manually:
-
-```ts
-import { useIsVisible } from '@samline/is-visible/svelte'
-```
-
-## How It Works
-
-The utility wraps the native IntersectionObserver.
-
-When the observer fires:
-
-- If the element intersects the viewport, visible() runs.
-- If inOut is enabled and the element leaves the viewport, notVisible() runs.
-
-If once is enabled, the element is unobserved after the first visibility event.
-
-## Best Practices
-
-### Use once for animations
-
-```ts
-once: true
-```
-
-This avoids extra observer work after the first visible transition.
-
-### Use rootMargin for lazy loading
-
-```ts
-rootMargin: '300px'
-```
-
-This can trigger loading before the element becomes visible.
-
-### Disconnect observers in frameworks
-
-In React, Vue, Svelte, Astro, or similar environments, always disconnect
-observers when the component unmounts or action is destroyed. The framework
-implementations here do this for you.
+All framework-specific implementations map to these same visibility semantics,
+even if their return values differ by framework.
 
 ## Notes
 

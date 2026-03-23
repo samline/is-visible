@@ -13,6 +13,8 @@ import {
 } from '@samline/is-visible/svelte'
 ```
 
+If you need the shared DOM-oriented API instead, see [docs/vanilla.md](docs/vanilla.md).
+
 ## useIsVisible
 
 The helper returns a Svelte action plus readable stores for visibility state and
@@ -40,7 +42,7 @@ the last observer entry.
 | initialValue | boolean                  | false    | Initial state returned before the observer fires        |
 | inOut        | boolean                  | false    | Enables the notVisible callback when the element leaves |
 | visible      | () => void               | () => {} | Runs when the element enters the viewport               |
-| notVisible   | () => void               | () => {} | Runs when the element leaves and inOut is enabled       |
+| notVisible   | () => void               | () => {} | Runs when the element leaves and `inOut` is enabled     |
 | once         | boolean                  | false    | Unobserves the element after the first visible event    |
 | options      | IntersectionObserverInit | {}       | Native observer options                                 |
 
@@ -70,6 +72,11 @@ stores.
 
 <div use:visibility />
 ```
+
+## When to use Svelte instead of Vanilla
+
+Use the Svelte entrypoint when you want actions and stores that integrate
+directly with Svelte's component model.
 
 ## SSR note
 

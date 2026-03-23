@@ -1,11 +1,13 @@
 # React
 
 Use the React implementation from the dedicated subpath so your app only pulls
-the React-specific runtime and types:
+the React-specific runtime and types.
 
 ```ts
 import { VisibilityObserver, useIsVisible } from '@samline/is-visible/react'
 ```
+
+If you need the shared DOM-oriented API instead, see [docs/vanilla.md](docs/vanilla.md).
 
 ## useIsVisible
 
@@ -35,7 +37,7 @@ export function HeroCard() {
 | initialValue | boolean                  | false    | Initial state returned before the observer fires        |
 | inOut        | boolean                  | false    | Enables the notVisible callback when the element leaves |
 | visible      | () => void               | () => {} | Runs when the element enters the viewport               |
-| notVisible   | () => void               | () => {} | Runs when the element leaves and inOut is enabled       |
+| notVisible   | () => void               | () => {} | Runs when the element leaves and `inOut` is enabled     |
 | once         | boolean                  | false    | Unobserves the element after the first visible event    |
 | options      | IntersectionObserverInit | {}       | Native observer options                                 |
 
@@ -64,6 +66,11 @@ export function ProductTeaser() {
   )
 }
 ```
+
+## When to use React instead of Vanilla
+
+Use the React entrypoint when you want lifecycle management, cleanup and
+visibility state to follow React's rendering model automatically.
 
 ## SSR note
 

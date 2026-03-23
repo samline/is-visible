@@ -1,11 +1,13 @@
 # Vue
 
 Use the Vue implementation from the dedicated subpath so your app only pulls
-the Vue-specific runtime and types:
+the Vue-specific runtime and types.
 
 ```ts
 import { VisibilityObserver, useIsVisible } from '@samline/is-visible/vue'
 ```
+
+If you need the shared DOM-oriented API instead, see [docs/vanilla.md](docs/vanilla.md).
 
 ## useIsVisible
 
@@ -35,7 +37,7 @@ const { isVisible, target } = useIsVisible({
 | initialValue | boolean                  | false    | Initial state returned before the observer fires        |
 | inOut        | boolean                  | false    | Enables the notVisible callback when the element leaves |
 | visible      | () => void               | () => {} | Runs when the element enters the viewport               |
-| notVisible   | () => void               | () => {} | Runs when the element leaves and inOut is enabled       |
+| notVisible   | () => void               | () => {} | Runs when the element leaves and `inOut` is enabled     |
 | once         | boolean                  | false    | Unobserves the element after the first visible event    |
 | options      | IntersectionObserverInit | {}       | Native observer options                                 |
 
@@ -62,6 +64,11 @@ import { VisibilityObserver } from '@samline/is-visible/vue'
   </VisibilityObserver>
 </template>
 ```
+
+## When to use Vue instead of Vanilla
+
+Use the Vue entrypoint when you want template refs, reactive state and cleanup
+to follow Vue's component lifecycle automatically.
 
 ## SSR note
 

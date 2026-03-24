@@ -1,6 +1,6 @@
 {
   "name": "@samline/is-visible",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Lightweight IntersectionObserver utility for visibility enter/leave callbacks.",
   "author": "Samuel Olvera (samline)",
   "license": "MIT",

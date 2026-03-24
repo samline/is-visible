@@ -7,7 +7,7 @@ WordPress templates and other no-bundler environments.
 ## Load the bundle
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible/dist/browser/is-visible.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible@0.5.0/dist/browser/is-visible.global.js"></script>
 ```
 
 After that script loads, the package exposes two browser globals:
@@ -66,7 +66,7 @@ Both browser globals use the same shared options as the vanilla API:
 ## Example: Shopify or WordPress style setup
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible/dist/browser/is-visible.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible@0.5.0/dist/browser/is-visible.global.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-track-visibility]').forEach((element) => {

@@ -57,12 +57,38 @@ bun add @samline/is-visible
 
 ### CDN / Browser
 
-Use the browser bundle when your project loads scripts directly in the page and
-cannot compile npm modules.
+Use the browser bundle when your project loads scripts directly in the page and cannot compile npm modules.
+
+This is useful in environments such as Shopify themes, WordPress templates, or plain HTML pages with no build step.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible/dist/browser/is-visible.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible@0.5.0/dist/browser/is-visible.global.js"></script>
 ```
+
+Then use it from a normal script:
+
+```html
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const element = document.querySelector('[data-track-visibility]')
+
+    if (!element) return
+
+    window.IsVisible.observe(element, {
+      inOut: true,
+      visible: () => {
+        console.log('Element entered the viewport')
+        element.classList.add('is-visible')
+      },
+      notVisible: () => {
+        console.log('Element left the viewport')
+      }
+    })
+  })
+</script>
+```
+
+After the CDN script loads, the browser build exposes `window.isVisible(...)` and `window.IsVisible.observe(...)`.
 
 Use one of the package manager commands above when your project has a build
 step. If you are working in Shopify, WordPress or any browser-only template

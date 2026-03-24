@@ -29,15 +29,44 @@ JavaScript directly in the page without a build step.
 
 ## Installation
 
-Install the package from npm:
+Choose the installation method that matches your environment.
+
+### npm
 
 ```bash
 npm install @samline/is-visible
 ```
 
-Use the npm package when your project has a build step. If you are working in
-Shopify, WordPress or any browser-only template without compilation, use the
-browser bundle described in [docs/browser.md](docs/browser.md).
+### pnpm
+
+```bash
+pnpm add @samline/is-visible
+```
+
+### yarn
+
+```bash
+yarn add @samline/is-visible
+```
+
+### bun
+
+```bash
+bun add @samline/is-visible
+```
+
+### CDN / Browser
+
+Use the browser bundle when your project loads scripts directly in the page and
+cannot compile npm modules.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@samline/is-visible/dist/browser/is-visible.global.js"></script>
+```
+
+Use one of the package manager commands above when your project has a build
+step. If you are working in Shopify, WordPress or any browser-only template
+without compilation, use the browser bundle described in [docs/browser.md](docs/browser.md).
 
 ## Entry Points
 

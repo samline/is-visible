@@ -1,4 +1,4 @@
-# Element Visibility Observer
+# Is visible
 
 A lightweight TypeScript utility built on top of the Intersection Observer API
 that lets you execute callbacks when a DOM element enters or leaves the

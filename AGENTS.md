@@ -11,7 +11,7 @@ Package memory: decisions and lessons specific to this package. Family rules are
 
 ## Family conventions (@samline)
 
-This block is synced from the samline packages hub (`Packages/AGENTS.md`, `scripts/sync.mjs`). Do not edit it here; change the hub and re-sync. The skill `.agents/skills/samline-package/SKILL.md` carries the full rules for a repository cloned on its own.
+This block is synced from the template that owns the family conventions ([package-landing-docs](https://github.com/samline/package-landing-docs) `family/AGENTS.md`, `node family/scripts/sync.mjs`). Do not edit it here; change the template and re-sync. The skill `.agents/skills/samline-package/SKILL.md` carries the full rules for a repository cloned on its own.
 
 - One package per repository. Framework-agnostic core in JS/CSS/HTML; adapters only when idiomatic, as optional peers.
 - No DOM access at import time; without a DOM, calls are no-ops. Respect `prefers-reduced-motion`; content stays visible without JavaScript.

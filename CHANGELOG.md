@@ -1,16 +1,28 @@
-# @samline/is-visible
+# Changelog
 
-## 1.0.1
+All notable changes to this package. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [semver](https://semver.org/).
 
-### Patch Changes
+## Unreleased
 
-- 72e0da7: Documentation only: the README follows the canonical @samline structure with links to the new website (Home, examples, docs and agent skill), and the package now ships LICENSE.md.
+### Added
 
-## 1.0.0
+- `@samline/is-visible/testing` exports `resetObservers()`, so packages that bundle the observer pool can reset it between unit tests. Test-only; not for production code.
 
-### Major Changes
+### Changed
 
-- e9a41c7: Move to the `samline/utils` monorepo and release 1.0.
+- The package moved from the `samline/utils` monorepo to its own repository, [samline/is-visible](https://github.com/samline/is-visible). Homepage, repository and documentation links point to the package's own site.
+
+## [1.0.1] - 2026-11-13
+
+### Fixed
+
+- Documentation only: the README follows the canonical @samline structure with links to the new website (Home, examples, docs and agent skill), and the package now ships LICENSE.md.
+
+## [1.0.0] - 2026-11-12
+
+### Added
+
+- Move to the `samline/utils` monorepo and release 1.0.
 
   - **Breaking:** `notVisible` no longer fires for an element that was never visible, and `visible` no longer repeats while the element stays visible.
   - Callbacks receive `(entry, element)`. Targets may be an element, a selector, a `NodeList` or an array.

@@ -1,0 +1,24 @@
+# Managed by the samline hub (Packages/templates/package). Edit there, then run scripts/sync.mjs.
+node_modules/
+dist/
+coverage/
+.astro/
+.vite/
+.cache/
+*.tsbuildinfo
+*.tgz
+
+# Browser-test output
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Local environment, logs, OS metadata and per-machine agent config
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.claude/settings.local.json
+.claude/launch.json

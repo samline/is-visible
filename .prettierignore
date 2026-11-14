@@ -1,0 +1,10 @@
+# Managed by the samline hub (Packages/templates/package). Edit there, then run scripts/sync.mjs.
+dist
+coverage
+node_modules
+.astro
+bun.lock
+CHANGELOG.md
+test-results
+playwright-report
+site

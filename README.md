@@ -2,7 +2,7 @@
 
 Know when elements enter and leave the viewport or any scroll container. One call watches an element, a selector or a list, on IntersectionObservers shared across the page, for vanilla JavaScript, React, Vue, Svelte and plain HTML.
 
-[Demo](https://samline.github.io/utils/is-visible/) · [Examples](https://samline.github.io/utils/is-visible/examples/) · [Documentation](https://samline.github.io/utils/docs/is-visible/) · [Changelog](CHANGELOG.md)
+[Demo](https://samline.github.io/is-visible/) · [Examples](https://samline.github.io/is-visible/examples/) · [Documentation](https://samline.github.io/is-visible/docs/) · [Changelog](CHANGELOG.md)
 
 ## Table of contents
 
@@ -128,28 +128,28 @@ In every adapter `isVisible` turns `false` when the element leaves, even without
 
 ## Documentation
 
-Read the [documentation](https://samline.github.io/utils/docs/is-visible/) for the full guides and API contracts, and explore [working examples](https://samline.github.io/utils/is-visible/examples/) with complete and separate source files.
+Read the [documentation](https://samline.github.io/is-visible/docs/) for the full guides and API contracts, and explore [working examples](https://samline.github.io/is-visible/examples/) with complete and separate source files.
 
-| Guide                                                                               | What it covers                                                      |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| [Installation](https://samline.github.io/utils/docs/is-visible/getting-started/)    | npm, CDN and the first lazy image.                                  |
-| [API reference](https://samline.github.io/utils/docs/is-visible/reference/api/)     | `isVisible`, `observeVisibility`, callbacks and the browser global. |
-| [Options](https://samline.github.io/utils/docs/is-visible/reference/configuration/) | Every option, shared observers and the fallback.                    |
-| [Frameworks](https://samline.github.io/utils/docs/is-visible/guides/frameworks/)    | React, Vue and Svelte adapters.                                     |
+| Guide                                                                         | What it covers                                                      |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [Installation](https://samline.github.io/is-visible/docs/getting-started/)    | npm, CDN and the first lazy image.                                  |
+| [API reference](https://samline.github.io/is-visible/docs/reference/api/)     | `isVisible`, `observeVisibility`, callbacks and the browser global. |
+| [Options](https://samline.github.io/is-visible/docs/reference/configuration/) | Every option, shared observers and the fallback.                    |
+| [Frameworks](https://samline.github.io/is-visible/docs/guides/frameworks/)    | React, Vue and Svelte adapters.                                     |
 
 ## Changelog
 
-Read [CHANGELOG.md](CHANGELOG.md) or the [published changelog](https://samline.github.io/utils/docs/is-visible/changelog/) for release history and explicitly marked breaking and behavior changes. Review the notes before upgrading.
+Read [CHANGELOG.md](CHANGELOG.md) or the [published changelog](https://samline.github.io/is-visible/docs/changelog/) for release history and explicitly marked breaking and behavior changes. Review the notes before upgrading.
 
 ## AI agent skill
 
-The [Is Visible skill](https://samline.github.io/utils/skills/is-visible/SKILL.md) teaches verified package integration. Its maintained [repository source](site/SKILL.md) and website download are the same file. Verify the installed package version before applying its guidance.
+The [Is Visible skill](https://samline.github.io/is-visible/skills/is-visible/SKILL.md) teaches verified package integration. Its maintained [repository source](skills/is-visible/SKILL.md) and website download are the same file. Verify the installed package version before applying its guidance.
 
-Download [SKILL.md](https://samline.github.io/utils/skills/is-visible/SKILL.md) into an `is-visible/` folder in your agent's supported skill directory. For agents that discover project skills from `.agents/skills/`:
+Download [SKILL.md](https://samline.github.io/is-visible/skills/is-visible/SKILL.md) into an `is-visible/` folder in your agent's supported skill directory. For agents that discover project skills from `.agents/skills/`:
 
 ```sh
 mkdir -p .agents/skills/is-visible
-curl --fail --location https://samline.github.io/utils/skills/is-visible/SKILL.md \
+curl --fail --location https://samline.github.io/is-visible/skills/is-visible/SKILL.md \
   --output .agents/skills/is-visible/SKILL.md
 ```
 

@@ -1,9 +1,9 @@
-# Managed by the samline hub (Packages/templates/package). Edit there, then run scripts/sync.mjs.
+# Managed by package-landing-docs (family/templates/package). Edit there, then run node family/scripts/sync.mjs.
 dist
 coverage
 node_modules
 .astro
-bun.lock
+pnpm-lock.yaml
 CHANGELOG.md
 test-results
 playwright-report

@@ -1,4 +1,4 @@
-# Managed by the samline hub (Packages/templates/package). Edit there, then run scripts/sync.mjs.
+# Managed by package-landing-docs (family/templates/package). Edit there, then run node family/scripts/sync.mjs.
 node_modules/
 dist/
 coverage/
@@ -7,6 +7,13 @@ coverage/
 .cache/
 *.tsbuildinfo
 *.tgz
+
+# Installs use pnpm only (pnpm-lock.yaml). Lockfiles of other package
+# managers are never committed.
+bun.lock
+bun.lockb
+package-lock.json
+yarn.lock
 
 # Browser-test output
 test-results/

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Size budgets for every published entry point.
- * Managed by the samline hub (Packages/templates/package). Edit there, then run scripts/sync.mjs.
+ * Managed by package-landing-docs (family/templates/package). Edit there, then run node family/scripts/sync.mjs.
  *
  * Each entry is bundled the way a consumer's bundler would see it (minified,
  * framework packages external) and gzipped. Budgets live in `package.json`

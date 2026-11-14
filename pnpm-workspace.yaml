@@ -1,0 +1,11 @@
+# Managed by package-landing-docs (family/templates/package). Edit there, then run node family/scripts/sync.mjs.
+# pnpm settings for this single-package repository (no workspace packages).
+
+# Fresh @samline releases install right away; every other version waits pnpm's
+# minimumReleaseAge before it can be installed.
+minimumReleaseAgeExclude:
+  - '@samline/*'
+
+# Dependencies allowed to run install scripts. Everything else is blocked.
+allowBuilds:
+  esbuild: true

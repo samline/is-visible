@@ -11,7 +11,13 @@ Apply these rules in every @samline repository. The repository's own `AGENTS.md`
 
 1. Read the package README, `AGENTS.md`, tests and `CHANGELOG.md`.
 2. Check whether a sibling package already solves the problem (registry: `repos.json` in the hub, or the list in this skill's description).
-3. Reuse primitives instead of re-implementing them: `@samline/internal` (auto-init, `data-*` readers, `resolveElements`, `isBrowser`, reduced motion), `@samline/is-visible` (IntersectionObserver pool), `@samline/debounce` (timing). Install the published versions from npm (`bun add -d @samline/<primitive>`); never link, alias or import a local checkout of a sibling repository. To use an unreleased change, the primitive is released first. `tsup.config.ts` bundles them with `noExternal: [/^@samline\//]` and `dts: { resolve: noExternal }`.
+3. Reuse primitives instead of re-implementing them: `@samline/internal` (auto-init, `data-*` readers, `resolveElements`, `isBrowser`, reduced motion), `@samline/is-visible` (IntersectionObserver pool), `@samline/debounce` (timing). Install the published versions from npm (`pnpm add -D @samline/<primitive>`); never link, alias or import a local checkout of a sibling repository. To use an unreleased change, the primitive is released first. `tsup.config.ts` bundles them with `noExternal: [/^@samline\//]` and `dts: { resolve: noExternal }`.
+
+## Package manager
+
+- Install with pnpm: `pnpm install`, `pnpm add -D <pkg>`, `pnpm install --frozen-lockfile` in CI, `pnpm exec <bin>`. Only `pnpm-lock.yaml` is committed; `packageManager` pins pnpm.
+- Run with Bun: `bun run <script>` for build, tests, checks and release. Never `bun install`, `bun add`, `npm install` or `yarn`.
+- `pnpm-workspace.yaml` keeps `minimumReleaseAgeExclude: ['@samline/*']` and the `allowBuilds` allowlist (esbuild). Never add a `preinstall` script to a published package.
 
 ## Shape
 

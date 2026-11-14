@@ -33,7 +33,7 @@
   "engines": {
     "node": ">=20"
   },
-  "packageManager": "bun@1.4.4",
+  "packageManager": "pnpm@12.9.1",
   "publishConfig": {
     "access": "public"
   },
@@ -89,7 +89,7 @@
     "format:check": "prettier --check .",
     "check": "bun run format:check && bun run typecheck && bun run test:coverage && bun run build && bun run size && bun run test:e2e",
     "prepublishOnly": "bun run clean && bun run build && bun run typecheck && bun run test:coverage",
-    "release": "bun run check && npm publish"
+    "release": "bun run check && pnpm publish"
   },
   "peerDependencies": {
     "react": ">=18",

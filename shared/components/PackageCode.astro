@@ -1,0 +1,41 @@
+---
+import Tabs from './Tabs.astro'
+import TabPanel from './TabPanel.astro'
+import CodeFiles from './CodeFiles.astro'
+import demo, { loadingModes } from '../i18n/translations/en/demo'
+import { filesFor, modesFor, type PackageExample } from '../lib/package-examples'
+interface Props {
+  slug?: string | null
+  example: PackageExample
+}
+const { slug, example } = Astro.props
+const modes = await Promise.all(
+  modesFor(slug).map(async id => ({
+    id,
+    label: loadingModes[id].label,
+    source: await filesFor(slug, example, id),
+  }))
+)
+---
+
+<Tabs
+  id={`package-code-${crypto.randomUUID()}`}
+  label={demo.modeLabel}
+  items={modes}
+  data-package-code
+>
+  {modes.map(mode => (
+    <TabPanel id={mode.id} label={mode.label} class:list={['mode-panel']}>
+      <CodeFiles
+        files={mode.source.files}
+        complete={{ code: mode.source.complete, copyLabel: demo.copyComplete }}
+      />
+    </TabPanel>
+  ))}
+</Tabs>
+
+<style>
+  .mode-panel {
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import CardGrid from '../../../shared/components/CardGrid.astro'
+import { getI18n } from '../i18n/utils'
+import Section from '../../../shared/components/Section.astro'
+import Box from '../../../shared/components/Box.astro'
+import SectionHeading from '../components/SectionHeading.astro'
+import RichText from '../components/RichText.astro'
+import FeatureCard from '../components/FeatureCard.astro'
+import { featureIcon } from '../components/feature-icons'
+const i18n = getI18n(Astro)
+const t = i18n.sections.features
+// Each item names its icon, so the picture always matches the copy.
+const features = Object.entries(t.items).map(([key, item]) => ({
+  ...item,
+  icon: featureIcon(item.icon, key),
+}))
+const headingId = `section-heading-${crypto.randomUUID()}`
+---
+
+<Section
+  aria-labelledby={headingId}
+  spacing="none"
+  id="features"
+  class:list={['content-section features-section']}
+>
+  <Box>
+    <SectionHeading
+      headingId={headingId}
+      context="features"
+      eyebrow={t.eyebrow}
+      class:list={['mb-12 flex flex-col items-start gap-3']}
+    >
+      {t.title}
+      <br />
+      <span class:list={['serif italic']}>{t.titleAccent}</span>
+    </SectionHeading>
+
+    <CardGrid columns={3} class:list={['feature-grid']}>
+      {features.map(({ title, description, icon }, index) => (
+        <FeatureCard title={title} number={String(index + 1).padStart(2, '0')}>
+          <Fragment slot="icon">
+            <svg
+              aria-hidden="true"
+              width="1.125rem"
+              height="1.125rem"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={icon}
+            />
+          </Fragment>
+          <RichText parts={description} />
+        </FeatureCard>
+      ))}
+    </CardGrid>
+  </Box>
+</Section>
+
+<style>
+  .feature-grid {
+    gap: 0.75rem;
+  }
+  @media (width < 48rem) {
+    .feature-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (width < 30rem) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

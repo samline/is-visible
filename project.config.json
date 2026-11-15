@@ -1,0 +1,31 @@
+{
+  "package": {
+    "name": "Is Visible",
+    "npmName": "@samline/is-visible",
+    "version": "1.1.0",
+    "description": "Visibility callbacks for one or many elements on shared intersection observers, for vanilla JavaScript, React, Vue, Svelte and plain HTML.",
+    "author": "Samuel Olvera (samline)",
+    "license": "MIT",
+    "keywords": ["intersection-observer", "visibility", "in-view", "lazy", "react", "vue", "svelte"]
+  },
+  "site": {
+    "url": "https://samline.github.io/is-visible/",
+    "repository": "https://github.com/samline/is-visible",
+    "namespace": "samline-is-visible",
+    "template": false,
+    "credit": "samline"
+  },
+  "theme": {
+    "accentLight": "#bf4532",
+    "accentDark": "#ea6a55"
+  },
+  "delivery": {
+    "cdnScript": "https://cdn.jsdelivr.net/npm/@samline/is-visible@1.1.0/dist/browser/is-visible.global.js",
+    "cdnStylesheet": null
+  },
+  "dev": {
+    "landingPort": 4410,
+    "docsPort": 4411,
+    "testPort": 4418
+  }
+}

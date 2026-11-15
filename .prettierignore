@@ -8,3 +8,17 @@ CHANGELOG.md
 test-results
 playwright-report
 site
+# The website has its own formatter (bun run site:format).
+landing
+docs
+shared
+brief
+site-tools
+site-tests
+site-e2e
+SITE.md
+REFERENCE.md
+playwright.site.config.ts
+project.config.json
+content-audit.json
+design-reference.json

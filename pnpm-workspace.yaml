@@ -1,5 +1,10 @@
 # Managed by package-landing-docs (family/templates/package). Edit there, then run node family/scripts/sync.mjs.
-# pnpm settings for this single-package repository (no workspace packages).
+# pnpm settings for this package and its website (landing, docs, shared).
+
+packages:
+  - landing
+  - docs
+  - shared
 
 # Fresh @samline releases install right away; every other version waits pnpm's
 # minimumReleaseAge before it can be installed.

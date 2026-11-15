@@ -89,7 +89,24 @@
     "format:check": "prettier --check .",
     "check": "bun run format:check && bun run typecheck && bun run test:coverage && bun run build && bun run size && bun run test:e2e",
     "prepublishOnly": "bun run clean && bun run build && bun run typecheck && bun run test:coverage",
-    "release": "bun run check && pnpm publish"
+    "release": "bun run check && pnpm publish",
+    "site:dev": "node site-tools/assets.mjs && node site-tools/dev.mjs",
+    "site:build": "node site-tools/assets.mjs && npm --workspace docs run build && npm --workspace landing run build && node site-tools/assemble.mjs && node site-tools/check-site.mjs",
+    "site:preview": "node site-tools/preview.mjs",
+    "site:check": "node site-tools/assets.mjs && node site-tools/check-config.mjs && npm run site:check:design && npm --workspace landing run check && npm --workspace docs run check",
+    "site:format": "prettier --plugin prettier-plugin-astro --write landing docs/src docs/scripts shared site-tools site-tests site-e2e skills playwright.site.config.ts project.config.json content-audit.json design-reference.json SITE.md --ignore-path .site-prettierignore",
+    "site:format:check": "prettier --plugin prettier-plugin-astro --check landing docs/src docs/scripts shared site-tools site-tests site-e2e skills playwright.site.config.ts project.config.json content-audit.json design-reference.json SITE.md --ignore-path .site-prettierignore",
+    "site:test": "node --test site-tests/*.test.mjs",
+    "site:test:browser": "playwright test --config playwright.site.config.ts",
+    "site:verify": "npm run site:check && npm run site:format:check && npm run site:test && npm run site:test:adaptation && npm run site:build && npm run site:check:identity && npm run site:check:content && npm run site:test:browser",
+    "site:configure": "node site-tools/configure.mjs",
+    "site:check:release": "npm run site:check:identity && node site-tools/check-release.mjs",
+    "site:check:content": "node site-tools/check-content.mjs",
+    "site:accent": "node site-tools/accent-pair.mjs",
+    "site:test:adaptation": "node site-tools/test-adaptation.mjs",
+    "site:check:design": "node site-tools/check-design.mjs",
+    "site:check:identity": "node site-tools/check-identity.mjs",
+    "test:package": "node scripts/test-package.mjs"
   },
   "peerDependencies": {
     "react": ">=18",
@@ -114,9 +131,11 @@
     "@types/node": "^24.13.5",
     "@types/react": "^19.1.0",
     "@vitest/coverage-v8": "^5.0.1",
+    "axe-core": "^4.14.0",
     "esbuild": "^0.28.2",
     "jsdom": "^26.1.0",
     "prettier": "^3.9.0",
+    "prettier-plugin-astro": "^1.1.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "svelte": "^5.28.2",
@@ -132,5 +151,14 @@
     "./dist/vue/index.js": 2000,
     "./dist/svelte/index.js": 1800,
     "./dist/testing/index.js": 300
+  },
+  "workspaces": [
+    "landing",
+    "docs",
+    "shared"
+  ],
+  "overrides": {
+    "parse5": "^8.1.0",
+    "@emnapi/runtime": "1.11.3"
   }
 }

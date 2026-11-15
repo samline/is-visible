@@ -29,3 +29,9 @@ playwright/.cache/
 .DS_Store
 .claude/settings.local.json
 .claude/launch.json
+
+# Website build output and generated assets (package-landing-docs)
+brief/
+shared/generated/
+**/public/fonts/
+**/public/font-licenses/

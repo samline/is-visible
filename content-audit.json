@@ -50,8 +50,8 @@
   "themeReview": {
     "status": "verified",
     "source": "The maintainer asked for a new accent, not used by any sibling, in chat on 2026-11-13; vermilion (#e0533d) derived with npm run accent. Carried over from the utils collection site.",
-    "accentLight": "#bf4532",
-    "accentDark": "#ea6a55"
+    "accentLight": "#15803d",
+    "accentDark": "#4ade80"
   },
   "sources": [
     {

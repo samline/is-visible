@@ -38,7 +38,7 @@ export function resolveProject(input = config) {
     if (!/^#[0-9a-f]{6}$/i.test(color))
       throw new Error('Accent colors must use six-digit hex values')
   for (const value of Object.values(input.delivery)) {
-    if (value !== null) {
+    if (typeof value === 'string') {
       const url = new URL(value)
       if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password)
         throw new Error('CDN assets require HTTP(S) URLs without credentials')

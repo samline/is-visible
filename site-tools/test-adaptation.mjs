@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs'
 import assert from 'node:assert/strict'
 import { cp, mkdir, mkdtemp, readFile, writeFile, symlink, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -17,6 +18,15 @@ const ignored = new Set([
 try {
   await cp(root, temporary, { recursive: true, filter: path => !ignored.has(basename(path)) })
   await symlink(join(root, 'node_modules'), join(temporary, 'node_modules'), 'dir')
+  // The examples import the package itself, which resolves to its built dist/.
+  if (existsSync(join(root, 'dist')))
+    await symlink(join(root, 'dist'), join(temporary, 'dist'), 'dir')
+  // pnpm keeps each app's dependencies in its own node_modules.
+  for (const app of ['landing', 'docs', 'shared']) {
+    if (existsSync(join(root, app, 'node_modules'))) {
+      await symlink(join(root, app, 'node_modules'), join(temporary, app, 'node_modules'), 'dir')
+    }
+  }
   // Exercise the documented importer against an invented package, then make the
   // editorial name change a maintainer would make after reviewing the import.
   const fixture = join(temporary, '.fixture-package')
@@ -38,7 +48,7 @@ try {
   execFileSync(
     process.execPath,
     [
-      join(temporary, 'scripts/configure.mjs'),
+      join(temporary, 'site-tools/configure.mjs'),
       // The copy may come from an already adapted (embedded) site.
       '--force',
       '--package',
@@ -76,18 +86,18 @@ try {
   assert.ok(skill.startsWith('---\nname: widget\n') && skill.includes('@example/widget'))
   // A retired route from a former docs site must keep working after assembly.
   await writeFile(
-    join(temporary, 'scripts/doc-migration.json'),
+    join(temporary, 'site-tools/doc-migration.json'),
     JSON.stringify({
       source: null,
       pages: [],
       redirects: { 'guide/options': 'reference/configuration' },
     })
   )
-  const { checkContent } = await import(join(temporary, 'scripts/check-content.mjs'))
+  const { checkContent } = await import(join(temporary, 'site-tools/check-content.mjs'))
   for (const base of ['/', '/tools/widget/']) {
     config.site.url = 'https://example.com' + base
     await writeFile(join(temporary, 'project.config.json'), JSON.stringify(config))
-    execFileSync('npm', ['run', 'build'], { cwd: temporary, stdio: 'pipe' })
+    execFileSync('npm', ['run', 'site:build'], { cwd: temporary, stdio: 'pipe' })
     for (const route of [
       'index.html',
       'examples/index.html',

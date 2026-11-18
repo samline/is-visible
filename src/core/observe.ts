@@ -74,10 +74,10 @@ const normalizeConfig = (options: ObserveVisibilityOptions): ObserverConfig => {
  *
  * Returns a cleanup that stops observing every element of this call.
  */
-export function observeVisibility(
+export const observeVisibility = (
   target: ElementTarget,
   options: ObserveVisibilityOptions = {}
-): () => void {
+): (() => void) => {
   if (!isBrowser()) return noop
 
   const elements = resolveElements(target)

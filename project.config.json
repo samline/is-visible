@@ -2,7 +2,7 @@
   "package": {
     "name": "Is Visible",
     "npmName": "@samline/is-visible",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Visibility callbacks for one or many elements on shared intersection observers, for vanilla JavaScript, React, Vue, Svelte and plain HTML.",
     "author": "Samuel Olvera (samline)",
     "license": "MIT",
@@ -20,7 +20,7 @@
     "accentDark": "#4ade80"
   },
   "delivery": {
-    "cdnScript": "https://cdn.jsdelivr.net/npm/@samline/is-visible@1.1.0/dist/browser/is-visible.global.js",
+    "cdnScript": "https://cdn.jsdelivr.net/npm/@samline/is-visible@1.1.1/dist/browser/is-visible.global.js",
     "cdnStylesheet": null
   },
   "dev": {

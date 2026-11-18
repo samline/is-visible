@@ -1,6 +1,6 @@
 {
   "status": "verified",
-  "packageVersion": "1.1.0",
+  "packageVersion": "1.1.1",
   "capabilityReview": {
     "status": "verified",
     "integrations": [
@@ -164,5 +164,5 @@
       "reviewed": true
     }
   ],
-  "notes": "Content reviewed in the utils collection site (1.0.1), then moved to this repository's standalone site on 2026-11-14. Source hashes were recomputed against @samline/is-visible@1.1.0."
+  "notes": "Content reviewed in the utils collection site (1.0.1), then moved to this repository's standalone site on 2026-11-14. Source hashes were recomputed against @samline/is-visible@1.1.1."
 }

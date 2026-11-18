@@ -12,15 +12,18 @@ import './_styles.css'
 
 <script>
   import { isVisible } from '@samline/is-visible'
+  import { preview } from '../../shared/lib/preview'
 
-  const feed = document.querySelector<HTMLElement>('[data-preview="lazy"]')!
-  isVisible(feed.querySelectorAll<HTMLElement>('[data-src]'), {
-    root: feed,
-    once: true,
-    rootMargin: '0px 0px 200px 0px',
-    visible: (_entry, article) => {
-      article.textContent = `${(article as HTMLElement).dataset.src} loaded`
-    },
+  preview('lazy', root => {
+    const feed = root.querySelector<HTMLElement>('[data-preview="lazy"]')!
+    return isVisible(feed.querySelectorAll<HTMLElement>('[data-src]'), {
+      root: feed,
+      once: true,
+      rootMargin: '0px 0px 200px 0px',
+      visible: (_entry, article) => {
+        article.textContent = `${(article as HTMLElement).dataset.src} loaded`
+      },
+    })
   })
 </script>
 

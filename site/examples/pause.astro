@@ -10,20 +10,27 @@ import './_styles.css'
 
 <script>
   import { isVisible } from '@samline/is-visible'
+  import { preview } from '../../shared/lib/preview'
 
-  const box = document.querySelector<HTMLElement>('[data-preview="pause"]')!
-  const panel = box.querySelector<HTMLElement>('.panel')!
-  const ticks = panel.querySelector('output')!
-  let timer: ReturnType<typeof setInterval> | undefined
+  preview('pause', root => {
+    const box = root.querySelector<HTMLElement>('[data-preview="pause"]')!
+    const panel = box.querySelector<HTMLElement>('.panel')!
+    const ticks = panel.querySelector('output')!
+    let timer: ReturnType<typeof setInterval> | undefined
 
-  isVisible(panel, {
-    root: box,
-    inOut: true,
-    threshold: 0.5,
-    visible: () => {
-      timer = setInterval(() => (ticks.textContent = String(Number(ticks.textContent) + 1)), 200)
-    },
-    notVisible: () => clearInterval(timer),
+    const stop = isVisible(panel, {
+      root: box,
+      inOut: true,
+      threshold: 0.5,
+      visible: () => {
+        timer = setInterval(() => (ticks.textContent = String(Number(ticks.textContent) + 1)), 200)
+      },
+      notVisible: () => clearInterval(timer),
+    })
+    return () => {
+      stop()
+      clearInterval(timer)
+    }
   })
 </script>
 

@@ -10,14 +10,17 @@ import './_styles.css'
 
 <script>
   import { isVisible } from '@samline/is-visible'
+  import { preview } from '../../shared/lib/preview'
 
-  const list = document.querySelector<HTMLElement>('[data-preview="reveal"]')!
-  list.dataset.ready = ''
-  isVisible(list.querySelectorAll('.reveal'), {
-    root: list,
-    once: true,
-    threshold: 0.2,
-    visible: (_entry, section) => section.classList.add('is-visible'),
+  preview('reveal', root => {
+    const list = root.querySelector<HTMLElement>('[data-preview="reveal"]')!
+    list.dataset.ready = ''
+    return isVisible(list.querySelectorAll('.reveal'), {
+      root: list,
+      once: true,
+      threshold: 0.2,
+      visible: (_entry, section) => section.classList.add('is-visible'),
+    })
   })
 </script>
 

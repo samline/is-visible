@@ -29,9 +29,9 @@ const configKey = ({ root, rootMargin, threshold, once, options }: UseIsVisibleO
  * Callbacks always read their latest value; the observer is recreated only
  * when the element or the observation settings change.
  */
-export function useIsVisible<TElement extends Element = HTMLElement>(
+export const useIsVisible = <TElement extends Element = HTMLElement>(
   options: UseIsVisibleOptions = {}
-): UseIsVisibleResult<TElement> {
+): UseIsVisibleResult<TElement> => {
   const optionsRef = useRef(options)
   optionsRef.current = options
 
@@ -73,7 +73,7 @@ export type VisibilityObserverProps<TElement extends ElementType = 'div'> = OwnP
 export type VisibilityObserverState = VisibilityState
 
 /** Renders `as` (default `div`) and passes `{ isVisible, entry }` to a render-prop child. */
-export function VisibilityObserver<TElement extends ElementType = 'div'>({
+export const VisibilityObserver = <TElement extends ElementType = 'div'>({
   as,
   children,
   initialValue,
@@ -87,7 +87,7 @@ export function VisibilityObserver<TElement extends ElementType = 'div'>({
   visible,
   fallback,
   ...elementProps
-}: VisibilityObserverProps<TElement>) {
+}: VisibilityObserverProps<TElement>) => {
   const { ref, ...state } = useIsVisible({
     ...(initialValue !== undefined && { initialValue }),
     ...(inOut !== undefined && { inOut }),

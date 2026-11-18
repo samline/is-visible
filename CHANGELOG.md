@@ -2,7 +2,13 @@
 
 All notable changes to this package. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [semver](https://semver.org/).
 
-## Unreleased
+## [1.1.1] - 2026-11-17
+
+### Fixed
+
+- Vue: `<VisibilityObserver>` accepts the `root` and `fallback` props, like the React component and `useIsVisible()`.
+
+## [1.1.0] - 2026-11-15
 
 ### Added
 

@@ -7,7 +7,7 @@ import { createApp, defineComponent, h, nextTick, ref } from 'vue'
 import * as react from '../src/react/index.js'
 import * as svelte from '../src/svelte/index.js'
 import * as vue from '../src/vue/index.js'
-import { el, emit, installMock } from './helpers.js'
+import { el, emit, installMock, MockObserver } from './helpers.js'
 
 beforeEach(() => {
   installMock()
@@ -134,6 +134,21 @@ describe('vue', () => {
     // No options at all.
     const bare = vue.useIsVisible()
     expect(bare.isVisible.value).toBe(false)
+  })
+
+  it('passes root and fallback from the component to the observer', async () => {
+    const host = el()
+    const scroller = el()
+    const app = createApp({
+      render: () =>
+        h(vue.VisibilityObserver, { id: 'rooted', root: scroller, fallback: 'none' }, () => 'x'),
+    })
+    app.mount(host)
+    await nextTick()
+    const target = host.querySelector('#rooted')!
+    const observer = MockObserver.instances.find(o => o.observed.has(target))
+    expect(observer?.options.root).toBe(scroller)
+    app.unmount()
   })
 })
 

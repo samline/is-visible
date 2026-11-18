@@ -24,9 +24,9 @@ export interface UseIsVisibleResult<TElement extends Element = HTMLElement> {
 }
 
 /** Stores plus an action that keeps them in sync with the node's visibility. */
-export function useIsVisible<TElement extends Element = HTMLElement>(
+export const useIsVisible = <TElement extends Element = HTMLElement>(
   initialOptions: UseIsVisibleOptions = {}
-): UseIsVisibleResult<TElement> {
+): UseIsVisibleResult<TElement> => {
   const isVisible = writable(initialOptions.initialValue ?? false)
   const entry = writable<IntersectionObserverEntry | null>(null)
 

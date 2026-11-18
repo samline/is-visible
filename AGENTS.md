@@ -5,7 +5,7 @@ Visibility callbacks for one or many elements on shared intersection observers, 
 Package memory: decisions and lessons specific to this package. Family rules are in the block below.
 
 - Extracted from the samline/utils monorepo on 2026-11-14 with its Git history (`git subtree split`).
-- The website (Home, Examples, Docs) is not built yet: `site/` holds the content written for the retired utils collection site (landing copy, docs, examples, demo) and is the source for embedding package-landing-docs here.
+- The website is embedded from package-landing-docs (`landing/`, `docs/`, `shared/`, `site-tools/`); `site/` holds this package's previews and copyable examples.
 
 <!-- samline:family:start -->
 
@@ -23,6 +23,7 @@ This block is synced from the template that owns the family conventions ([packag
 - `bun run check` must pass: format, typecheck, unit tests with coverage thresholds, build, size budgets, e2e in Chromium, Firefox and WebKit.
 - README is the package guide and the site's source of truth; public text in English. Any public API change updates tests, README, docs, examples and `skills/<name>/SKILL.md` together.
 - Releases: Keep a Changelog entry for every user-facing change, semver, pinned CDN URLs bumped before release. Publishing is manual (`bun run release` by the maintainer); CI never publishes; no `--provenance`.
+- Public repository: no dated reports, handoff notes, transcripts or client names; private notes go in the ignored `.local/`. Site examples with state offer Reset; icons are SVG, never Unicode glyphs.
 - Never add AI attribution to commits, tags or pull requests.
 
 <!-- samline:family:end -->

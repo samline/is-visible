@@ -3,7 +3,7 @@ import { observeVisibility, type ElementTarget, type IsVisibleOptions } from '..
 export * from '../core/index.js'
 
 /** Watch `target` and get `visible` / `notVisible` callbacks. Returns a cleanup. */
-export function isVisible(target: ElementTarget, options: IsVisibleOptions = {}): () => void {
+export const isVisible = (target: ElementTarget, options: IsVisibleOptions = {}): (() => void) => {
   return observeVisibility(target, options)
 }
 

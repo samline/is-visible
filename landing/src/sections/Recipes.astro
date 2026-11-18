@@ -32,7 +32,7 @@ const headingId = `section-heading-${crypto.randomUUID()}`
           <RecipeCard
             title={item.title}
             context={item.context}
-            href={docsHref(item.docsRoute, Astro)}
+            href={docsHref(item.docsRoute)}
             linkLabel={item.docsLabel}
           >
             <RichText slot="description" parts={item.description} />
@@ -45,6 +45,6 @@ const headingId = `section-heading-${crypto.randomUUID()}`
         </div>
       </Reveal>
     ))}
-    <TextLink href={examplesHref(Astro)}>{t.examplesLabel}</TextLink>
+    <TextLink href={examplesHref()}>{t.examplesLabel}</TextLink>
   </Box>
 </Section>

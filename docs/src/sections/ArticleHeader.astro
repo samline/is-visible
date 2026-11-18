@@ -3,7 +3,6 @@ import PageTitle from '../../../shared/components/PageTitle.astro'
 import { getI18n } from '../i18n/utils'
 const t = getI18n(Astro)
 import { href } from '../lib/routes'
-import { identityFor, packageSlug } from '../../../shared/lib/identity'
 interface Props {
   title: string
   titleAccent?: string
@@ -11,9 +10,6 @@ interface Props {
   current: string
 }
 const { title, titleAccent, description, current } = Astro.props
-// Collection mode adds the package between Docs and the article.
-const slug = packageSlug(Astro)
-const packageName = slug ? identityFor(Astro).name : null
 ---
 
 <nav class:list={['breadcrumb']} aria-label={t.breadcrumbLabel} data-pagefind-ignore>
@@ -25,12 +21,6 @@ const packageName = slug ? identityFor(Astro).name : null
         <a href={href('index')}>{t.breadcrumb}</a>
       )}
     </li>
-    {slug && current !== slug && (
-      <li>
-        <span aria-hidden="true">/</span>
-        <a href={href(slug)}>{packageName}</a>
-      </li>
-    )}
     {current !== 'index' && (
       <li>
         <span aria-hidden="true">/</span>

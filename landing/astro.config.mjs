@@ -4,7 +4,7 @@ import tailwind from '@tailwindcss/vite'
 import sitemap from '@astrojs/sitemap'
 import { inlineSmallStylesheets } from '../shared/lib/site-build.mjs'
 import { project } from '../shared/lib/project.mjs'
-import { collectionAlias } from '../shared/lib/collection.mjs'
+import { siteAliases } from '../shared/lib/aliases.mjs'
 const development = process.argv.includes('dev')
 export default defineConfig({
   site: project.url,
@@ -14,8 +14,8 @@ export default defineConfig({
   integrations: [sitemap()],
   devToolbar: { enabled: false },
   vite: {
-    // Collection mode: `@collection/<package>/site/...` resolves into the monorepo.
-    resolve: { alias: collectionAlias },
+    // `@package-site/...` resolves to the site's custom previews (site/).
+    resolve: { alias: siteAliases },
     plugins: [
       tailwind(),
       developmentRedirect({

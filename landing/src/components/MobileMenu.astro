@@ -7,11 +7,9 @@ import drawerCss from '@samline/drawer/styles.css?inline'
 import { getI18n } from '../i18n/utils'
 const i18n = getI18n(Astro)
 import { project } from '../../../shared/lib/project.mjs'
-import { identityFor, isCollection } from '../../../shared/lib/identity'
+import { identity } from '../../../shared/lib/identity'
 const t = i18n.navigation.mobile
 const instanceId = `mobile-menu-${crypto.randomUUID()}`
-const identity = identityFor(Astro)
-const packageLinks = !isCollection || Boolean(identity.slug)
 ---
 
 <package-site-mobile-menu
@@ -49,10 +47,8 @@ const packageLinks = !isCollection || Boolean(identity.slug)
           {i18n.navigation.items.map((item, index) => (
             <li>
               <a
-                href={navigationHref(item, Astro.url.pathname, Astro)}
-                aria-current={
-                  'page' in item && !isHome(Astro.url.pathname, Astro) ? 'page' : undefined
-                }
+                href={navigationHref(item, Astro.url.pathname)}
+                aria-current={'page' in item && !isHome(Astro.url.pathname) ? 'page' : undefined}
                 aria-label={item.label}
                 class:list={['menu-link']}
               >
@@ -80,19 +76,17 @@ const packageLinks = !isCollection || Boolean(identity.slug)
                 <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
               </a>
             </li>
-            {packageLinks && (
-              <li>
-                <a
-                  href={`https://www.npmjs.com/package/${identity.npmName}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {i18n.common.links.npm}
-                  <Icon name="arrow-up-right" size="1em" weight={2} />
-                  <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
-                </a>
-              </li>
-            )}
+            <li>
+              <a
+                href={`https://www.npmjs.com/package/${identity.npmName}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {i18n.common.links.npm}
+                <Icon name="arrow-up-right" size="1em" weight={2} />
+                <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
+              </a>
+            </li>
           </ul>
           <p class:list={['menu-meta']}>
             <span>{format(i18n.common.versionLabel, { version: i18n.common.version })}</span>

@@ -7,7 +7,7 @@ import accessibleOverflow from './scripts/rehype-accessible-code.mjs'
 import { codeTheme } from '../shared/lib/code-theme.mjs'
 import { inlineSmallStylesheets } from '../shared/lib/site-build.mjs'
 import { project } from '../shared/lib/project.mjs'
-import { collectionAlias } from '../shared/lib/collection.mjs'
+import { siteAliases } from '../shared/lib/aliases.mjs'
 export default defineConfig({
   site: project.origin,
   base: project.docsBase.slice(0, -1),
@@ -17,8 +17,8 @@ export default defineConfig({
   integrations: [mdx(), sitemap()],
   devToolbar: { enabled: false },
   vite: {
-    // Collection mode: `@collection/<package>/site/...` resolves into the monorepo.
-    resolve: { alias: collectionAlias },
+    // `@package-site/...` resolves to the site's custom previews (site/).
+    resolve: { alias: siteAliases },
     plugins: [tailwind()],
     build: { assetsInlineLimit: inlineSmallStylesheets },
   },

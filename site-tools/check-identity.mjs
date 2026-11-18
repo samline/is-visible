@@ -23,44 +23,13 @@ const repository = String(
   .replace(/^git\+/, '')
   .replace(/\.git$/, '')
 const credit = config?.site.credit ?? new URL(repository).pathname.split('/').filter(Boolean)[0]
-// Collection mode (see .agents/collection-mode.md): every package README and
-// every package page follows the contract with that package's own npm name.
-const collection =
-  config?.mode === 'collection'
-    ? JSON.parse(await readFile(join(root, 'shared/generated/collection.json'), 'utf8')).packages
-    : []
-const packagesDir = config?.collection ? resolve(root, config.collection.packagesDir) : null
-const problems = collection.length
-  ? (
-      await Promise.all(
-        collection.map(async item =>
-          checkReadme(await readFile(join(packagesDir, item.slug, 'README.md'), 'utf8'), {
-            npmName: item.npmName,
-            siteUrl: new URL(`${item.slug}/`, siteUrl).href,
-            credit,
-            template: false,
-            cdn: !!item.delivery.cdnScript,
-            links: {
-              examples: item.hasExamples ? new URL(`${item.slug}/examples/`, siteUrl).href : null,
-              docs: new URL(`docs/${item.slug}/`, siteUrl).href,
-              skillDownload: new URL(`skills/${item.skill}/SKILL.md`, siteUrl).href,
-              skillSource: 'site/SKILL.md',
-            },
-          }).map(problem => `${item.slug}/README.md: ${problem}`)
-        )
-      )
-    ).flat()
-  : checkReadme(await readFile(join(packageRoot, 'README.md'), 'utf8'), {
-      npmName,
-      siteUrl,
-      credit,
-      template: manifest.private === true,
-      cdn: config ? !!config.delivery.cdnScript : !!manifest.exports?.['./browser/global'],
-    })
-const packageOf = local =>
-  collection.find(
-    item => local.startsWith(`${item.slug}/`) || local.startsWith(`docs/${item.slug}/`)
-  )
+const problems = checkReadme(await readFile(join(packageRoot, 'README.md'), 'utf8'), {
+  npmName,
+  siteUrl,
+  credit,
+  template: manifest.private === true,
+  cdn: config ? !!config.delivery.cdnScript : !!manifest.exports?.['./browser/global'],
+})
 const dist = join(root, 'landing/dist')
 await access(join(dist, 'index.html'))
 let total = 0
@@ -76,17 +45,12 @@ const walk = async directory => {
     const html = await readFile(path, 'utf8')
     if (/http-equiv="refresh"/i.test(html)) continue
     const local = path.slice(dist.length + 1)
-    const owner = packageOf(local)
-    const relative = owner ? local.slice(owner.slug.length + 1) : local
     problems.push(
       ...checkPageIdentity(html, {
-        npmName: owner?.npmName ?? npmName,
+        npmName,
         credit,
-        footer:
-          !local.startsWith('docs/') && ['index.html', 'examples/index.html'].includes(relative),
-        subject: owner
-          ? { 'examples/index.html': 'Examples' }[relative]
-          : { 'examples/index.html': 'Examples', 'docs/index.html': 'Documentation' }[local],
+        footer: !local.startsWith('docs/') && ['index.html', 'examples/index.html'].includes(local),
+        subject: { 'examples/index.html': 'Examples', 'docs/index.html': 'Documentation' }[local],
       }).map(problem => `${local}: ${problem}`)
     )
     total++

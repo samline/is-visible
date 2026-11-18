@@ -1,6 +1,6 @@
 ---
-// Collection mode: one package example — its live preview (rendered by the
-// package's site/examples/<id>.astro) above its copyable files.
+// One package example: its live preview (site/examples/<id>.astro) above its
+// copyable files.
 import DemoStudio from './DemoStudio.astro'
 import DemoPanel from './DemoPanel.astro'
 import PackageCode from './PackageCode.astro'
@@ -10,20 +10,14 @@ import Icon from './Icon.astro'
 import demo from '../i18n/translations/en/demo'
 import { previewFor, type PackageExample } from '../lib/package-examples'
 interface Props {
-  /** Collection package slug; omit in package mode. */
-  slug?: string | null
   example: PackageExample
   showCode?: boolean
 }
-const { slug, example, showCode = true } = Astro.props
-const Preview = previewFor(slug, example.id) as any
+const { example, showCode = true } = Astro.props
+const Preview = previewFor(example.id) as any
 ---
 
-<div
-  data-ui
-  class:list={['package-preview']}
-  data-package-example={`${slug ?? 'site'}/${example.id}`}
->
+<div data-ui class:list={['package-preview']} data-package-example={`site/${example.id}`}>
   <DemoStudio>
     <DemoPanel label={example.tab} tagline={demo.previewTagline}>
       <p class:list={['description']}>{example.description}</p>
@@ -43,7 +37,7 @@ const Preview = previewFor(slug, example.id) as any
     <Disclosure class:list={['code-disclosure']}>
       <span slot="summary">{demo.openCode}</span>
       <div class:list={['code-body']}>
-        <PackageCode slug={slug} example={example} />
+        <PackageCode example={example} />
       </div>
     </Disclosure>
   )}

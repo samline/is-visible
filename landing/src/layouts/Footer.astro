@@ -3,16 +3,13 @@ import Icon from '../../../shared/components/Icon.astro'
 import { format } from '../../../shared/i18n/format'
 import { docsHref } from '../lib/docs'
 import { examplesHref } from '../lib/navigation'
-import { identityFor, isCollection } from '../../../shared/lib/identity'
+import { identity } from '../../../shared/lib/identity'
 import { getI18n } from '../i18n/utils'
 import Box from '../../../shared/components/Box.astro'
 import Logo from '../../../shared/components/Logo.astro'
 const i18n = getI18n(Astro)
 import { project } from '../../../shared/lib/project.mjs'
 const t = i18n.navigation.footer
-const identity = identityFor(Astro)
-// A collection's site-level pages have no single skill, changelog or npm package.
-const packageLinks = !isCollection || Boolean(identity.slug)
 ---
 
 <footer class:list={['site-footer']}>
@@ -30,37 +27,33 @@ const packageLinks = !isCollection || Boolean(identity.slug)
       <nav aria-label={t.label} class:list={['footer-nav']}>
         <div class:list={['footer-group']}>
           <h2>{t.explore}</h2>
-          <a href={docsHref('overview', Astro)}>{i18n.common.links.docs}</a>
-          <a href={docsHref('setup', Astro)}>{t.setup}</a>
-          <a href={examplesHref(Astro)}>{t.examples}</a>
+          <a href={docsHref('overview')}>{i18n.common.links.docs}</a>
+          <a href={docsHref('setup')}>{t.setup}</a>
+          <a href={examplesHref()}>{t.examples}</a>
         </div>
         <div class:list={['footer-group']}>
           <h2>{t.project}</h2>
-          {packageLinks && (
-            <a
-              href={`${import.meta.env.BASE_URL}skills/${identity.skill}/SKILL.md`}
-              download="SKILL.md"
-            >
-              {t.skill}
-            </a>
-          )}
+          <a
+            href={`${import.meta.env.BASE_URL}skills/${identity.skill}/SKILL.md`}
+            download="SKILL.md"
+          >
+            {t.skill}
+          </a>
           <a href={project.repository} target="_blank" rel="noopener noreferrer">
             {i18n.common.links.github}
             <Icon name="arrow-up-right" size="1em" weight={2} />
             <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
           </a>
-          {packageLinks && <a href={docsHref('changelog', Astro)}>{t.changelog}</a>}
-          {packageLinks && (
-            <a
-              href={`https://www.npmjs.com/package/${identity.npmName}`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {i18n.common.links.npm}
-              <Icon name="arrow-up-right" size="1em" weight={2} />
-              <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
-            </a>
-          )}
+          <a href={docsHref('changelog')}>{t.changelog}</a>
+          <a
+            href={`https://www.npmjs.com/package/${identity.npmName}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {i18n.common.links.npm}
+            <Icon name="arrow-up-right" size="1em" weight={2} />
+            <span class:list={['sr-only']}>{i18n.common.externalLinkHint}</span>
+          </a>
           <a
             href={`${project.repository}/blob/main/LICENSE.md`}
             target="_blank"

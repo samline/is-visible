@@ -9,14 +9,12 @@ import ThemeToggle from '../../../shared/components/ThemeToggle.astro'
 import MobileNavigation from '../components/MobileNavigation.astro'
 import Search from '../components/Search.astro'
 import { manifest } from '../../../shared/lib/project.mjs'
-import { identityFor, packageSlug } from '../../../shared/lib/identity'
+import { identity } from '../../../shared/lib/identity'
 interface Props {
   current: string
 }
 const { current } = Astro.props
 const t = getI18n(Astro)
-const slug = packageSlug(Astro)
-const identity = identityFor(Astro)
 const repository = manifest.repository.url.replace(/^git\+/, '').replace(/\.git$/, '')
 ---
 
@@ -26,7 +24,7 @@ const repository = manifest.repository.url.replace(/^git\+/, '').replace(/\.git$
       <Box size="wide" class:list={['header-inner']}>
         <div class:list={['brand-group']}>
           <Logo href={landingHref()} version={identity.version} />
-          <a class:list={['docs-label']} href={href(slug ?? 'index')}>
+          <a class:list={['docs-label']} href={href('index')}>
             {t.docs}
           </a>
         </div>

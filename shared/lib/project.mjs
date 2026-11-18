@@ -44,30 +44,12 @@ export function resolveProject(input = config) {
         throw new Error('CDN assets require HTTP(S) URLs without credentials')
     }
   }
-  // Collection mode documents several packages of a monorepo in one site.
-  // See .agents/collection-mode.md. The default package mode is unchanged.
-  const mode = input.mode ?? 'package'
-  if (!['package', 'collection'].includes(mode))
-    throw new Error('mode must be "package" or "collection"')
-  let collection = null
-  if (mode === 'collection') {
-    const { packagesDir, packages } = input.collection ?? {}
-    if (typeof packagesDir !== 'string' || !packagesDir.trim() || /^[a-z]+:/i.test(packagesDir))
-      throw new Error('collection.packagesDir must be a path relative to the site root')
-    if (
-      !Array.isArray(packages) ||
-      packages.length === 0 ||
-      !packages.every(slug => typeof slug === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(slug))
-    )
-      throw new Error('collection.packages must list package directory names (lowercase slugs)')
-    if (new Set(packages).size !== packages.length)
-      throw new Error('collection.packages must not repeat a package')
-    if (packages.some(slug => ['docs', 'examples', 'skills'].includes(slug)))
-      throw new Error('collection.packages cannot use a reserved route (docs, examples, skills)')
-    collection = { packagesDir: packagesDir.replace(/\/+$/, ''), packages: [...packages] }
-  } else if (input.collection !== undefined) {
-    throw new Error('collection requires mode: "collection"')
-  }
+  // Collection mode (one site for several packages) was retired: one package,
+  // one repository, one website.
+  if (input.mode !== undefined && input.mode !== 'package')
+    throw new Error('mode must be "package"; collection sites are no longer supported')
+  if (input.collection !== undefined)
+    throw new Error('collection is no longer supported: one website per package')
   const dev = { landingPort: 4330, docsPort: 4331, testPort: 4338, ...input.dev }
   for (const [key, port] of Object.entries(dev))
     if (!Number.isInteger(port) || port < 1024 || port > 65535)
@@ -82,8 +64,6 @@ export function resolveProject(input = config) {
     ...input.site,
     ...input.theme,
     delivery: input.delivery,
-    mode,
-    collection,
     dev,
     url: site.href,
     origin: site.origin,

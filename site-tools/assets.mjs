@@ -1,15 +1,9 @@
 import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { project } from '../shared/lib/project.mjs'
-import { readCollection } from '../shared/lib/collection.mjs'
 
-// Collection mode: pages import this generated registry instead of reading the
-// filesystem. Package mode writes an empty list so imports always resolve.
-const generated = new URL('../shared/generated/', import.meta.url)
-await mkdir(new URL('no-packages/', generated), { recursive: true })
-await writeFile(
-  new URL('collection.json', generated),
-  JSON.stringify({ mode: project.mode, packages: readCollection() }, null, 2) + '\n'
-)
+// Sites without custom previews point the @package-site alias at this empty
+// directory (shared/lib/aliases.mjs), so its globs resolve to nothing.
+await mkdir(new URL('../shared/generated/no-site/', import.meta.url), { recursive: true })
 for (const app of ['landing', 'docs']) {
   const target = new URL(`../${app}/public/`, import.meta.url)
   await mkdir(target, { recursive: true })

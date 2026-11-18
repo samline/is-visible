@@ -6,7 +6,7 @@ import { project } from '../../../../../shared/lib/project.mjs'
 
 type Named = { name: string; description: string; credit: string }
 
-/** Navigation copy for one identity: the package, or a package of a collection. */
+/** Navigation copy for the package. */
 export const navigationFor = (project: Named) =>
   ({
     mainLabel: 'Main navigation',
@@ -80,48 +80,10 @@ export const examplesFor = (project: Named) =>
     skill: `Download the ${project.name} skill for AI agents`,
   }) as const
 
-/** Collection mode Home: the catalog of every package (see .agents/collection-mode.md). */
-export const collection = {
-  seoTitle: 'Utilities, examples and documentation',
-  seoDescription: project.description,
-  eyebrow: 'Catalog',
-  // PageTitle requires the accent to end the title.
-  title: `${project.name}. Pick what you need.`,
-  accent: 'Pick what you need.',
-  description: project.description,
-  search: 'Search packages',
-  searchPlaceholder: 'Search by name, purpose or tag',
-  category: 'Category',
-  allCategories: 'All categories',
-  results: '{count} packages shown',
-  empty: 'No package matches your search. Clear the search or choose another category.',
-  docs: 'Docs',
-  examples: 'Examples',
-  version: 'Version {version}',
-  examplesTitle: 'Examples. Pick a package.',
-  examplesAccent: 'Pick a package.',
-  examplesDescription: 'Every package with live previews and copyable files.',
-  examplesSeoTitle: 'Examples',
-  examplesSeoDescription:
-    'Live previews and copyable example files for each package of the collection.',
-} as const
-
-// Collection mode: site-level pages (the catalog, /examples/, /docs/) link the
-// catalog, every package's examples and the docs overview.
-const collectionNavigation = {
-  ...navigationFor(project),
-  items: [
-    { href: '#catalog', label: 'Packages', description: 'Browse every package of the collection.' },
-    { page: 'examples', label: 'Examples', description: 'Live previews for each package.' },
-    { docsRoute: 'overview', label: 'Docs', description: 'Guides and references per package.' },
-  ],
-} as const
-
 export default {
-  collection,
   sections,
   common,
   controls,
-  navigation: project.mode === 'collection' ? collectionNavigation : navigationFor(project),
+  navigation: navigationFor(project),
   examples: examplesFor(project),
 } as const

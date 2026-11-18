@@ -5,14 +5,13 @@ import LinkCard from '../../../shared/components/LinkCard.astro'
 import { getI18n } from '../i18n/utils'
 const t = getI18n(Astro)
 import { getNavigation } from '../lib/navigation'
-import { packageSlug } from '../../../shared/lib/identity'
 import { href } from '../lib/routes'
 import { manifest } from '../../../shared/lib/project.mjs'
 interface Props {
   current: string
 }
 const { current } = Astro.props
-const groups = await getNavigation(Astro.currentLocale, packageSlug(Astro))
+const groups = await getNavigation(Astro.currentLocale)
 const pages = groups.flatMap(group => group.pages)
 const index = pages.findIndex(([id]) => id === current)
 const previous = pages[index - 1],

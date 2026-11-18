@@ -11,15 +11,13 @@ import TextLink from '../../../shared/components/TextLink.astro'
 import { getI18n } from '../i18n/utils'
 import { docsHref } from '../lib/docs'
 import { project } from '../../../shared/lib/project.mjs'
-import { identityFor, packageSlug } from '../../../shared/lib/identity'
+import { identity } from '../../../shared/lib/identity'
 import PackagePreview from '../../../shared/components/PackagePreview.astro'
 import { examplesFor } from '../../../shared/lib/package-examples'
 import { scenarios, presetIds } from '../../../shared/i18n/translations/en/demo'
 const t = getI18n(Astro).examples
-// Collection mode: a package's examples come from its site/examples.ts.
-const slug = packageSlug(Astro)
-// Package mode: optional custom previews in site/examples.ts replace the scenarios.
-const packageExamples = examplesFor(slug)
+// Optional custom previews in site/examples.ts replace the scenarios.
+const packageExamples = examplesFor()
 const custom = packageExamples.length > 0
 const items = custom
   ? packageExamples.map(example => ({ id: example.id, tab: example.tab, title: example.title }))
@@ -28,7 +26,6 @@ const items = custom
 // (6 → 3 columns, 8 → 4); narrow viewports still fall back to 2 and 1.
 const count = items.length
 const columns = count <= 4 ? count : count % 4 === 0 ? 4 : count % 3 === 0 ? 3 : 4
-const identity = identityFor(Astro)
 ---
 
 <Section spacing="none" aria-labelledby="examples-title" class:list={['gallery-hero']}>
@@ -47,7 +44,7 @@ const identity = identityFor(Astro)
         {t.exploreAction}
         <Icon name="arrow-down" size="1em" weight={2} />
       </Button>
-      <Button context="hero" href={docsHref('setup', Astro)} variant="secondary">
+      <Button context="hero" href={docsHref('setup')} variant="secondary">
         {t.installAction}
         <Icon name="arrow-right" size="1em" weight={2} />
       </Button>
@@ -80,7 +77,7 @@ const identity = identityFor(Astro)
           {item.title}
         </SectionHeading>
         {custom ? (
-          <PackagePreview slug={slug} example={packageExamples[index]!} />
+          <PackagePreview example={packageExamples[index]!} />
         ) : (
           <Playground preset={item.id as (typeof presetIds)[number]} showCode />
         )}
@@ -88,7 +85,7 @@ const identity = identityFor(Astro)
     ))}
     <div class:list={['resources']}>
       <p class:list={['basis-full', 'text-center', 'text-pretty']}>{t.possibilities}</p>
-      <TextLink href={docsHref('examples', Astro)}>{t.guide}</TextLink>
+      <TextLink href={docsHref('examples')}>{t.guide}</TextLink>
       <TextLink href={`${project.base}skills/${identity.skill}/SKILL.md`} download="SKILL.md">
         {t.skill}
       </TextLink>

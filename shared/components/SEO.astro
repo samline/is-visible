@@ -1,6 +1,6 @@
 ---
 import { project } from '../lib/project.mjs'
-import { identityFor } from '../lib/identity'
+import { identity } from '../lib/identity'
 import { documentTitle } from '../lib/site-identity.mjs'
 import { serializeJsonLd } from '../lib/serialize'
 interface Props {
@@ -11,8 +11,7 @@ interface Props {
   breadcrumb?: { name: string; url: string }[]
 }
 const { title, description, path, article = false, breadcrumb = [] } = Astro.props
-const identity = identityFor(Astro)
-// Package pages brand with the package npm name; collection pages with the collection's.
+// Pages brand with the package npm name.
 const metaTitle = documentTitle(title, identity.npmName)
 const canonical = new URL(path, project.url).href
 const social = new URL('social.png', project.url).href

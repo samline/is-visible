@@ -3,8 +3,7 @@ import NavLink from '../../../shared/components/NavLink.astro'
 import { getI18n } from '../i18n/utils'
 const t = getI18n(Astro)
 import { getNavigation } from '../lib/navigation'
-import { packageSlug } from '../../../shared/lib/identity'
-const groups = await getNavigation(Astro.currentLocale, packageSlug(Astro))
+const groups = await getNavigation(Astro.currentLocale)
 import { href } from '../lib/routes'
 interface Props {
   current: string

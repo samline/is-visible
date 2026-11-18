@@ -56,14 +56,7 @@ const readmeSections = markdown => {
   return sections
 }
 
-/**
- * `links` overrides the website and skill locations; collection mode passes a
- * package's own Home, Examples, Docs, skill download and repository source.
- */
-export function checkReadme(
-  markdown,
-  { npmName, siteUrl, cdn = false, template = false, links = {} }
-) {
+export function checkReadme(markdown, { npmName, siteUrl, cdn = false, template = false }) {
   const problems = []
   if (markdown.includes('<!-- package-site:starter-readme -->'))
     problems.push('README: replace the generated starter with verified package content.')
@@ -110,7 +103,6 @@ export function checkReadme(
     docs: base + 'docs/',
     skillDownload: base + `skills/${skill}/SKILL.md`,
     skillSource: `skills/${skill}/SKILL.md`,
-    ...links,
   }
   const wantedResources = [
     ['Demo', urls.demo],

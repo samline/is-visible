@@ -9,9 +9,6 @@ import MobileMenu from '../components/MobileMenu.astro'
 import ThemeToggle from '../../../shared/components/ThemeToggle.astro'
 const i18n = getI18n(Astro)
 import { project } from '../../../shared/lib/project.mjs'
-import { isCollection, packageSlug } from '../../../shared/lib/identity'
-// The collection catalog has no #how section; its first step is the catalog.
-const getStartedAnchor = isCollection && !packageSlug(Astro) ? '#catalog' : '#how'
 ---
 
 <package-site-header>
@@ -28,8 +25,8 @@ const getStartedAnchor = isCollection && !packageSlug(Astro) ? '#catalog' : '#ho
           {i18n.navigation.items.map(item => (
             <NavLink
               inline
-              href={navigationHref(item, Astro.url.pathname, Astro)}
-              current={'page' in item && !isHome(Astro.url.pathname, Astro) ? 'page' : undefined}
+              href={navigationHref(item, Astro.url.pathname)}
+              current={'page' in item && !isHome(Astro.url.pathname) ? 'page' : undefined}
             >
               {item.label}
             </NavLink>
@@ -65,7 +62,7 @@ const getStartedAnchor = isCollection && !packageSlug(Astro) ? '#catalog' : '#ho
           </Button>
           <Button
             context="nav"
-            href={navigationHref({ href: getStartedAnchor }, Astro.url.pathname, Astro)}
+            href={navigationHref({ href: '#how' }, Astro.url.pathname)}
             class:list={['hidden lg:inline-flex']}
             variant="primary"
           >

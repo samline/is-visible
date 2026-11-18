@@ -5,15 +5,14 @@ import CodeFiles from './CodeFiles.astro'
 import demo, { loadingModes } from '../i18n/translations/en/demo'
 import { filesFor, modesFor, type PackageExample } from '../lib/package-examples'
 interface Props {
-  slug?: string | null
   example: PackageExample
 }
-const { slug, example } = Astro.props
+const { example } = Astro.props
 const modes = await Promise.all(
-  modesFor(slug).map(async id => ({
+  modesFor().map(async id => ({
     id,
     label: loadingModes[id].label,
-    source: await filesFor(slug, example, id),
+    source: await filesFor(example, id),
   }))
 )
 ---

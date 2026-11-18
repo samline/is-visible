@@ -24,3 +24,5 @@ playwright.site.config.ts
 project.config.json
 content-audit.json
 design-reference.json
+# Third-party agent skills keep their upstream formatting.
+.agents/skills

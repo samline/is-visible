@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 
-import { resetObservers } from '../src/core/pool.js'
+import { resetObservers } from '../src/vanilla/pool.js'
 
 export class MockObserver {
   static instances: MockObserver[] = []

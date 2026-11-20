@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import isVisible, { observeVisibility } from '../src/index.js'
-import { countObservers } from '../src/core/pool.js'
+import { countObservers } from '../src/vanilla/pool.js'
 import { el, emit, installMock, MockObserver } from './helpers.js'
 
 beforeEach(() => {

@@ -12,9 +12,14 @@ import {
   type ShallowRef,
 } from 'vue'
 
-import { observeState, type VisibilityState, type VisibilityStateOptions } from '../core/state.js'
+import {
+  observeState,
+  type VisibilityState,
+  type VisibilityStateOptions,
+} from '../vanilla/state.js'
 
 export * from '../core/index.js'
+export { observeVisibility } from '../vanilla/observe.js'
 
 export type UseIsVisibleOptions = VisibilityStateOptions
 

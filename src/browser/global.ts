@@ -1,4 +1,4 @@
-import { observeVisibility } from '../core/observe.js'
+import { observeVisibility } from '../vanilla/observe.js'
 import { isVisible } from '../vanilla/index.js'
 
 const api = { observe: isVisible, isVisible, observeVisibility }

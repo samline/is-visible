@@ -68,13 +68,13 @@
     },
     {
       "source": "src/browser/global.ts",
-      "sha256": "2ca4c04ea00f543b3f0a9634e41027cffb072c7f15a9b9b604d1cd3f1d1bb19f",
+      "sha256": "9349f097b527521934e01c91a8feacc59eea98df0c0b8c495abc791700bd71f7",
       "destination": "docs/src/content/docs/getting-started.mdx",
       "reviewed": true
     },
     {
       "source": "src/core/index.ts",
-      "sha256": "ef2310442c8d13e94899dacfe47930b467bd6c276765e60eac638dae968e8854",
+      "sha256": "42b002ca9214911623ca289d9facb8fbc089ed833ded3ff37f5239f2ab445bc6",
       "destination": "docs/src/content/docs/reference/api.md",
       "reviewed": true
     },
@@ -98,19 +98,19 @@
     },
     {
       "source": "src/index.ts",
-      "sha256": "df37a207f1c44dfe0da1210bb4d23ac96bdce267627dd67de7142f1af52db790",
+      "sha256": "129e6abf6c880e587379cdfef6a8927f9f78b58e284cbf3ee356c32c1ee45eac",
       "destination": "docs/src/content/docs/reference/api.md",
       "reviewed": true
     },
     {
       "source": "src/react/index.ts",
-      "sha256": "e27ca3b5c6546b9c48a2ded54993bb5c63ffc6f08d478c7f5947183425b1980d",
+      "sha256": "7d43894cbd075d5cd45499622089f6efb0521b25b30dd3a5f9c48ffc980c6073",
       "destination": "docs/src/content/docs/guides/frameworks.md",
       "reviewed": true
     },
     {
       "source": "src/svelte/index.ts",
-      "sha256": "4cb8b235bf8c67e97461219dfa3a9425d284f6c4b57fc1dec219cc152ccff682",
+      "sha256": "04180ae57f1df3a9108fae8b46b324dbc8b153b30f8bfc41b3e26e7ea295fb26",
       "destination": "docs/src/content/docs/guides/frameworks.md",
       "reviewed": true
     },
@@ -122,7 +122,7 @@
     },
     {
       "source": "src/vue/index.ts",
-      "sha256": "51bdb057ca6d532a1d0a01c5ade02e51d13c58c45ff06657139890842d2e6b22",
+      "sha256": "199a31811f76458b996cbb1cb633420f12bc4d94c81a28d64bd2bc8ecef2bbd2",
       "destination": "docs/src/content/docs/guides/frameworks.md",
       "reviewed": true
     }

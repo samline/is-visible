@@ -8,7 +8,7 @@ export default [
     description:
       'once stops observing after the first entry. Without JavaScript or IntersectionObserver the content stays visible.',
     files: {
-      html: `<div id="list">
+      html: `<div id="list" tabindex="0" role="region" aria-label="Scrollable sections">
   <section class="reveal">First section</section>
   <section class="reveal">Second section</section>
   <section class="reveal">Third section</section>
@@ -46,7 +46,7 @@ isVisible(list.querySelectorAll('.reveal'), {
     description:
       'rootMargin starts loading 200px before an item scrolls in. Each item loads exactly once.',
     files: {
-      html: `<div id="feed">
+      html: `<div id="feed" tabindex="0" role="region" aria-label="Scrollable feed">
   <article data-src="Story 1">Loading…</article>
   <article data-src="Story 2">Loading…</article>
   <article data-src="Story 3">Loading…</article>
@@ -85,9 +85,9 @@ isVisible(feed.querySelectorAll('[data-src]'), {
     description:
       'inOut reports leaving too: a counter runs while half of its panel is visible and pauses when it leaves.',
     files: {
-      html: `<div id="box">
+      html: `<div id="box" tabindex="0" role="region" aria-label="Scrollable box">
   <p>Scroll down to the panel.</p>
-  <div id="panel">Running: <output id="ticks">0</output></div>
+  <div id="panel">Running: <output id="ticks" aria-live="off">0</output></div>
   <p style="height: 20rem"></p>
 </div>`,
       css: `#box { height: 12rem; overflow-y: auto; padding: 1rem; border: 1px solid #ccc; }

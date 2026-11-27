@@ -5,12 +5,12 @@ const cards = ['Alpha', 'Bravo', 'Charlie', 'Delta', 'Echo', 'Foxtrot']
 
 <is-visible-demo class="demo">
   <p class="hint">Scroll the box. Each card reports when half of it is visible.</p>
-  <div class="scroller" tabindex="0" aria-label="Scrollable cards">
+  <div class="scroller" tabindex="0" role="region" aria-label="Scrollable cards">
     {
       cards.map(name => (
         <div class="card" data-card>
           <span>{name}</span>
-          <output>hidden</output>
+          <output aria-live="off">hidden</output>
         </div>
       ))
     }

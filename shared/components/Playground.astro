@@ -69,7 +69,7 @@ const Frame = framed ? DemoStudio : 'div'
             />
             <p class:list={['preview-description']}>{item.description}</p>
           </div>
-          <dl class:list={['readout']} aria-live="polite">
+          <dl class:list={['readout']}>
             {item.readouts.map(readout => (
               <div>
                 <dt>{readout.label}</dt>

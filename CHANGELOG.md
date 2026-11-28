@@ -2,6 +2,12 @@
 
 All notable changes to this package. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow [semver](https://semver.org/).
 
+## [1.1.2] - 2026-11-27
+
+### Changed
+
+- `src/core` now holds only the option types; the observers, pool and state moved to `src/vanilla`, following the family package shape. The public API and behavior are unchanged.
+
 ## [1.1.1] - 2026-11-17
 
 ### Fixed

@@ -119,7 +119,7 @@ Enqueue the pinned classic script from your theme or plugin, deferred, on the fr
 add_action('wp_enqueue_scripts', function () {
   wp_enqueue_script(
     'is-visible',
-    'https://cdn.jsdelivr.net/npm/@samline/is-visible@1.1.1/dist/browser/is-visible.global.js',
+    'https://cdn.jsdelivr.net/npm/@samline/is-visible@1.1.2/dist/browser/is-visible.global.js',
     [],
     null,
     ['strategy' => 'defer', 'in_footer' => true]

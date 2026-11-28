@@ -1,6 +1,6 @@
 {
   "status": "verified",
-  "packageVersion": "1.1.1",
+  "packageVersion": "1.1.2",
   "capabilityReview": {
     "status": "verified",
     "integrations": [
@@ -56,13 +56,13 @@
   "sources": [
     {
       "source": "README.md",
-      "sha256": "bd617f51e8deb2e978a21708c6f8de83889c76822d9b7e9a5257234dcc9b6510",
+      "sha256": "440558b9c35c7b0663d156659b5960463202ae9b21eb9d9a3448087fadfe9b6a",
       "destination": "docs/src/content/docs/index.mdx",
       "reviewed": true
     },
     {
       "source": "CHANGELOG.md",
-      "sha256": "c48c011feb2b0e695ed62f85ddd3d50c79371cc74dc41df75eef5380d3abd240",
+      "sha256": "9e10d0343edbda1014a125527b75bd82a376a1e121972721900e44b51aabdb89",
       "destination": "CHANGELOG.md",
       "reviewed": true
     },
